@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+  <title>yes noox</title>
+  <meta name="description" content="Indian hot reels - Watch thousands of Indian, Tamil hot reels, desi girls reels and bhabhi hot videos." />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7T1QSE879V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7T1QSE879V');
+</script>
+</head>
+<body>
+
+  <!-- Header New Style -->
+  <header>
+    <img src="assets/img/logo.png" class="logo" alt="Logo">
+    <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
+  </header>
+
+  <!-- Main Scroll Container -->
+  <main>
+    <div id="reelContainer" class="scroll-container">
+      <div class="loading">⏳ Loading reels...</div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button><img src="assets/icons/home.png" alt="Home"><span>Home</span></button>
+    <button><img src="assets/icons/search.png" alt="Search"><span>Search</span></button>
+    <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
+    <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
+  </nav>
+
+  <!-- Fixed Footer Ad -->
+  <div class="footer-ad-placeholder">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : 'e44514c9894fd8039a2c45da60ed9301',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/e44514c9894fd8039a2c45da60ed9301/invoke.js"></script>
+  </div>
+
+  <!-- New JS -->
+  <script>
+    window.WORKER_BASE = "https://reel-hub.govty02.workers.dev";
+    let reelCount = 0;
+
+    async function loadVideos() {
+      const container = document.getElementById("reelContainer");
+      container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
+
+      try {
+        const res = await fetch(window.WORKER_BASE);
+        const data = await res.json();
+        container.innerHTML = "";
+
+        if (!data.videos || data.videos.length === 0) {
+          container.innerHTML = "<p>कोई वीडियो नहीं मिला।</p>";
+          return;
+        }
+
+        data.videos.forEach(video => {
+          reelCount++;
+          const reel = document.createElement("div");
+          reel.className = "reel";
+
+          reel.innerHTML = `
+            <video class="reel-video" src="${video.url}" autoplay loop muted playsinline></video>
+            <div class="footer-tags">#hot #desi #bhabhi</div>
+            <div class="play-pause-btn">▶</div>
+            <div class="right-icons">
+              <div class="icon-btn like-btn"><img src="assets/icons/like.png"><span>120</span></div>
+              <div class="icon-btn comment-btn"><img src="assets/icons/comment.png"><span>15</span></div>
+              <div class="icon-btn share-btn"><img src="assets/icons/share.png"><span>Share</span></div>
+              <button class="icon-btn audio-btn">
+                <img src="assets/icons/speaker-off.png" alt="Mute/Unmute">
+              </button>
+            </div>
+          `;
+
+          const vidEl = reel.querySelector(".reel-video");
+          const playBtn = reel.querySelector(".play-pause-btn");
+          const audioBtn = reel.querySelector(".audio-btn");
+          const audioImg = audioBtn.querySelector("img");
+
+          const toggleVideo = () => {
+            if (vidEl.paused) { vidEl.play().catch(err=>{}); playBtn.style.display="none"; }
+            else { vidEl.pause(); playBtn.style.display="flex"; }
+          };
+          vidEl.addEventListener("click", toggleVideo);
+          playBtn.addEventListener("click", toggleVideo);
+
+          audioBtn.addEventListener("click", () => {
+            vidEl.muted = !vidEl.muted;
+            audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
+          });
+
+          reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
+          reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
+          reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
+
+          container.appendChild(reel);
+        });
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = "<p>⚠️ वीडियो लोड नहीं हो पाए।</p>";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadVideos();
+
+      const btns = document.querySelectorAll(".bottom-nav button");
+      btns[0].onclick = () => window.location.href = "/";
+      btns[1].onclick = () => alert("Search feature coming soon.");
+      btns[2].onclick = () => alert("Bookmark feature coming soon.");
+      btns[3].onclick = () => alert("Login feature coming soon.");
+    });
+  </script>
+</body>
+</html>
