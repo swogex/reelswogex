@@ -65,20 +65,6 @@ async function loadVideos() {
 
       container.appendChild(reel);
 
-      // Center ad placeholder after every 4th reel
-      if (reelCount % 4 === 0) {
-        const adDiv = document.createElement('div');
-        adDiv.className = 'center-ad-placeholder';
-        adDiv.innerHTML = "Center Ad Here";
-        reel.parentNode.insertBefore(adDiv, reel.nextSibling);
-      }
-    });
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = "<p>⚠️ वीडियो लोड नहीं हो पाए।</p>";
-  }
-}
-
 // Bottom nav actions
 document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
