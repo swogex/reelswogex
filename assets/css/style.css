@@ -144,11 +144,3 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
    ⏳ Loading
 ==================================*/
 .loading { padding: 20px; text-align: center; color: #ccc; }
-
-/* ===============================
-   🖼️ Footer Ad
-==================================*/
-.footer-ad-placeholder {
-  position: fixed; bottom: 56px; left: 50%;
-  transform: translateX(-50%); height: 50px; z-index: 100;
-}
