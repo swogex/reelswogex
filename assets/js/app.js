@@ -1,5 +1,6 @@
 window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapka worker URL
 let reelCount = 0;
+let currentPlaying = null; // currently visible video
 
 async function loadVideos() {
   const container = document.getElementById("reelContainer");
@@ -23,7 +24,7 @@ async function loadVideos() {
       reel.innerHTML = `
         <video class="reel-video" src="${video.url}" autoplay loop muted playsinline></video>
         <div class="footer-tags">#hot #desi #bhabhi</div>
-        <div class="play-pause-btn">▶</div>
+        <div class="play-pause-btn">⏸</div>
         <div class="right-icons">
           <div class="icon-btn like-btn"><img src="assets/icons/like.png"><span>120</span></div>
           <div class="icon-btn comment-btn"><img src="assets/icons/comment.png"><span>15</span></div>
@@ -39,14 +40,14 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Play / Pause
+      // Play / Pause with icon toggle
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
-          playBtn.style.display = "none";
+          playBtn.textContent = "⏸";
         } else {
           vidEl.pause();
-          playBtn.style.display = "flex";
+          playBtn.textContent = "▶";
         }
       };
       vidEl.addEventListener("click", toggleVideo);
@@ -54,10 +55,10 @@ async function loadVideos() {
 
       // Audio toggle
       audioBtn.addEventListener("click", () => {
-        vidEl.muted = !vidEl.muted;
-        audioImg.src = vidEl.muted
-          ? "assets/icons/speaker-off.png"
-          : "assets/icons/speaker-on.png";
+        const isMuted = vidEl.muted;
+        vidEl.muted = !isMuted;
+        vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
+        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
       // Like / Comment / Share
@@ -67,6 +68,47 @@ async function loadVideos() {
 
       container.appendChild(reel);
     });
+
+    // -----------------------------
+    // Scroll / Auto-Pause Handler
+    // -----------------------------
+    function isInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+    }
+
+    function handleScrollPause() {
+      const reels = document.querySelectorAll(".reel");
+      reels.forEach(reel => {
+        const video = reel.querySelector(".reel-video");
+        const playBtn = reel.querySelector(".play-pause-btn");
+        const audioBtnImg = reel.querySelector(".audio-btn img");
+
+        if (isInViewport(video)) {
+          // Auto-play visible video
+          if (currentPlaying && currentPlaying !== video) {
+            currentPlaying.pause();
+            const prevPlayBtn = currentPlaying.closest(".reel").querySelector(".play-pause-btn");
+            prevPlayBtn.textContent = "▶";
+            currentPlaying.muted = true;
+            currentPlaying.closest(".reel").querySelector(".audio-btn img").src = "assets/icons/speaker-off.png";
+          }
+          video.play().catch(() => {});
+          if (!video.dataset.userUnmuted) video.muted = true;
+          currentPlaying = video;
+          playBtn.textContent = video.paused ? "▶" : "⏸";
+        } else {
+          video.pause();
+          video.muted = true;
+          playBtn.textContent = "▶";
+          audioBtnImg.src = "assets/icons/speaker-off.png";
+        }
+      });
+    }
+
+    window.addEventListener("scroll", handleScrollPause);
+    setInterval(handleScrollPause, 500); // safety
+    handleScrollPause(); // initial
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";

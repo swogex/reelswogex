@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /proxy/video/
 Allow: /
-Sitemap: https://yesnoox.com/sitemap.xml
+Sitemap: https://desisukh.com/sitemap.xml
