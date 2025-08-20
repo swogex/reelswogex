@@ -11,18 +11,36 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Top Ad Script -->
-  <script type="text/javascript">
-    atOptions = {
-      'key' : 'beb4357a9f3e3cb4ad23051f64297ec4',
-      'format' : 'iframe',
-      'height' : 50,
-      'width' : 320,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" 
-          src="//www.highperformanceformat.com/beb4357a9f3e3cb4ad23051f64297ec4/invoke.js"></script>
+  <style>
+    /* Top auto ad (sticky slide-in) */
+    .top-auto-ad {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      pointer-events: auto;
+      transform: translateY(-100%);
+      animation: slideDown 450ms ease-out forwards;
+      background: transparent;
+    }
+    .top-auto-ad-inner {
+      width: 100%;
+      max-width: 420px; /* ad width 320px, thoda safe area */
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 4px 0;
+    }
+    @keyframes slideDown {
+      to { transform: translateY(0); }
+    }
+
+    /* Make sure content isn't hidden behind sticky elements on tiny screens */
+    header { position: relative; z-index: 10; }
+    main { position: relative; z-index: 1; }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7T1QSE879V"></script>
@@ -35,13 +53,18 @@
 </head>
 <body>
 
-  <!-- Header New Style -->
+  <!-- Header -->
   <header>
     <img src="assets/img/logo.png" class="logo" alt="Logo">
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- Main Scroll Container for Reels -->
+  <!-- ✅ Top Auto Ad (sticky, Google Auto Ads जैसा) -->
+  <div class="top-auto-ad">
+    <div class="top-auto-ad-inner" id="topAdSlot"></div>
+  </div>
+
+  <!-- Main Scroll Container -->
   <main>
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
@@ -56,7 +79,7 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
 
-  <!-- Updated JavaScript -->
+  <!-- App JS (reels + auto-ad system) -->
   <script src="assets/js/app.js"></script>
 </body>
 </html>

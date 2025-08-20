@@ -1,4 +1,12 @@
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // आपका worker URL
+// ====== CONFIG ======
+window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapka worker URL
+
+// Auto-ads options (Google Auto Ads जैसा)
+// Inline ads (reels ke beech) by default band; on karna ho to true kar do.
+const ENABLE_INLINE_ADS = false;
+const INLINE_AD_FREQUENCY = 5; // har 5th reel ke baad
+
+// ====== REELS LOGIC ======
 let reelCount = 0;
 
 async function loadVideos() {
@@ -15,7 +23,7 @@ async function loadVideos() {
       return;
     }
 
-    data.videos.forEach(video => {
+    data.videos.forEach((video) => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -39,7 +47,7 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Play/Pause toggle
+      // Play/Pause
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
@@ -52,20 +60,27 @@ async function loadVideos() {
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
 
-      // Audio mute/unmute toggle
+      // Audio toggle
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
-        audioImg.src = vidEl.muted 
-          ? "assets/icons/speaker-off.png" 
-          : "assets/icons/speaker-on.png";
+        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
-      // Like / Comment / Share buttons
+      // Like / Comment / Share
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
       container.appendChild(reel);
+
+      // (OPTIONAL) Inline auto-ad insert like Google Auto Ads
+      if (ENABLE_INLINE_ADS && reelCount % INLINE_AD_FREQUENCY === 0) {
+        const slot = document.createElement("div");
+        slot.className = "inline-auto-ad";
+        slot.style.cssText = "display:flex;justify-content:center;margin:8px 0;";
+        container.appendChild(slot);
+        injectAdInto(slot); // use same ad network snippet
+      }
     });
   } catch (err) {
     console.error(err);
@@ -73,8 +88,49 @@ async function loadVideos() {
   }
 }
 
+// ====== AUTO AD (Top sticky + optional inline) ======
+function injectAdInto(targetEl) {
+  // Each call sets atOptions and loads invoke.js dynamically into the target element.
+  // Many ad networks read global atOptions; creating a scoped loader per slot:
+  if (!targetEl) return;
+
+  // Clear previous content
+  targetEl.innerHTML = "";
+
+  // Create a wrapper to isolate scripts
+  const wrapper = document.createElement("div");
+  targetEl.appendChild(wrapper);
+
+  // 1) Set atOptions BEFORE loader
+  const config = document.createElement("script");
+  config.type = "text/javascript";
+  config.text = `
+    atOptions = {
+      'key' : 'beb4357a9f3e3cb4ad23051f64297ec4',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  `;
+  wrapper.appendChild(config);
+
+  // 2) Load the network script
+  const loader = document.createElement("script");
+  loader.type = "text/javascript";
+  loader.src = "//www.highperformanceformat.com/beb4357a9f3e3cb4ad23051f64297ec4/invoke.js";
+  wrapper.appendChild(loader);
+}
+
+function mountTopAd() {
+  const topSlot = document.getElementById("topAdSlot");
+  if (topSlot) injectAdInto(topSlot);
+}
+
+// ====== INIT ======
 document.addEventListener("DOMContentLoaded", () => {
-  loadVideos();
+  mountTopAd();   // Top sticky auto-ad
+  loadVideos();   // Reels
 
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length === 4) {
