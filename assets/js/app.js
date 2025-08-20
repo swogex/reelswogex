@@ -64,14 +64,6 @@ async function loadVideos() {
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
       container.appendChild(reel);
-
-      // Insert Center Ad after every 4 reels
-      if (reelCount % 4 === 0) {
-        const adDiv = document.createElement('div');
-        adDiv.className = 'center-ad-placeholder';
-        adDiv.innerHTML = "Center Ad Here";
-        container.appendChild(adDiv);
-      }
     });
   } catch (err) {
     console.error(err);
@@ -89,5 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
     btns[1].onclick = () => alert("Search feature coming soon.");
     btns[2].onclick = () => alert("Bookmark feature coming soon.");
     btns[3].onclick = () => alert("Login feature coming soon.");
+  }
+
+  // ✅ Bottom banner close functionality
+  const closeBtn = document.getElementById("closed");
+  const banner = document.getElementById("bl_banner");
+  if (closeBtn && banner) {
+    closeBtn.addEventListener("click", () => {
+      banner.style.display = "none";
+    });
   }
 });
