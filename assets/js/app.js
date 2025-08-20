@@ -1,4 +1,4 @@
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapke worker URL
+window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // आपका worker URL
 let reelCount = 0;
 
 async function loadVideos() {
@@ -39,7 +39,7 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Play/Pause
+      // Play/Pause toggle
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
@@ -52,13 +52,15 @@ async function loadVideos() {
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
 
-      // Audio toggle
+      // Audio mute/unmute toggle
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
-        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
+        audioImg.src = vidEl.muted 
+          ? "assets/icons/speaker-off.png" 
+          : "assets/icons/speaker-on.png";
       });
 
-      // Like / Comment / Share
+      // Like / Comment / Share buttons
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
@@ -71,7 +73,6 @@ async function loadVideos() {
   }
 }
 
-// Bottom nav actions
 document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
 
