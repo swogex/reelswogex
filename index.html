@@ -10,15 +10,18 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7T1QSE879V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-7T1QSE879V');
-</script>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7T1QSE879V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7T1QSE879V');
+  </script>
 </head>
 <body>
 
@@ -43,26 +46,34 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
 
-  <!-- Fixed Footer Ad -->
-<script type='text/javascript'>
-$(document).ready(function() {$('img#closed').click(function(){$('#bl_banner').hide(90);});});
-</script>
-<div id='fixedban' style='width:100%;margin:auto;text-align:center;float:none;overflow:hidden;display:scroll;position:fixed;bottom:0;z-index:999;-webkit-transform:translateZ(0);'>
-<div style='text-align:middle;display:block;max-width:728px;height:auto;overflow:hidden;margin:auto'>
+  <!-- Fixed Footer Ad with Close Button -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("img#closed").click(function() {
+        $("#bl_banner").hide(90);
+      });
+    });
+  </script>
 
-<<script type="text/javascript">
-	atOptions = {
-		'key' : 'beb4357a9f3e3cb4ad23051f64297ec4',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/beb4357a9f3e3cb4ad23051f64297ec4/invoke.js"></script>> Display Ads Size 340x55
+  <div id="fixedban" style="width:100%;margin:auto;text-align:center;float:none;overflow:hidden;position:fixed;bottom:0;z-index:999;-webkit-transform:translateZ(0);">
+    <div id="bl_banner" style="text-align:center;display:block;max-width:728px;height:auto;overflow:hidden;margin:auto;position:relative;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
+      
+      <!-- Close Button -->
+      <img id="closed" src="assets/icons/close.png" alt="Close" style="position:absolute;top:5px;right:5px;width:18px;height:18px;cursor:pointer;">
 
-</div>
-</div>
+      <!-- Ad Code -->
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'beb4357a9f3e3cb4ad23051f64297ec4',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/beb4357a9f3e3cb4ad23051f64297ec4/invoke.js"></script>
+    </div>
+  </div>
 
   <!-- New JS -->
   <script>

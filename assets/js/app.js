@@ -1,4 +1,4 @@
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapke worker URL
+window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapka worker URL
 let reelCount = 0;
 
 async function loadVideos() {
@@ -39,7 +39,7 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Play/Pause
+      // Play / Pause
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
@@ -55,7 +55,9 @@ async function loadVideos() {
       // Audio toggle
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
-        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
+        audioImg.src = vidEl.muted
+          ? "assets/icons/speaker-off.png"
+          : "assets/icons/speaker-on.png";
       });
 
       // Like / Comment / Share
@@ -64,6 +66,12 @@ async function loadVideos() {
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
       container.appendChild(reel);
+    });
+  } catch (err) {
+    console.error("Error loading videos:", err);
+    container.innerHTML = "<p>⚠️ Error loading videos.</p>";
+  }
+}
 
 // Bottom nav actions
 document.addEventListener("DOMContentLoaded", () => {
@@ -71,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length === 4) {
-    btns[0].onclick = () => window.location.href = "/";
+    btns[0].onclick = () => (window.location.href = "/");
     btns[1].onclick = () => alert("Search feature coming soon.");
     btns[2].onclick = () => alert("Bookmark feature coming soon.");
     btns[3].onclick = () => alert("Login feature coming soon.");
