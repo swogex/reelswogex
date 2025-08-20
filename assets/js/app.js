@@ -64,14 +64,6 @@ async function loadVideos() {
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
       container.appendChild(reel);
-
-      // Center ad placeholder after every 4th reel
-      if (reelCount % 4 === 0) {
-        const adDiv = document.createElement('div');
-        adDiv.className = 'center-ad-placeholder';
-        adDiv.innerHTML = "Center Ad Here";
-        reel.parentNode.insertBefore(adDiv, reel.nextSibling);
-      }
     });
   } catch (err) {
     console.error(err);
