@@ -1,7 +1,4 @@
-// ====== CONFIG ======
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapka worker URL
-
-// ====== REELS LOGIC ======
+window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // Worker URL
 let reelCount = 0;
 
 async function loadVideos() {
@@ -18,7 +15,7 @@ async function loadVideos() {
       return;
     }
 
-    data.videos.forEach((video) => {
+    data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -67,6 +64,14 @@ async function loadVideos() {
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
       container.appendChild(reel);
+
+      // Insert Center Ad after every 4 reels
+      if (reelCount % 4 === 0) {
+        const adDiv = document.createElement('div');
+        adDiv.className = 'center-ad-placeholder';
+        adDiv.innerHTML = "Center Ad Here";
+        container.appendChild(adDiv);
+      }
     });
   } catch (err) {
     console.error(err);
@@ -74,9 +79,9 @@ async function loadVideos() {
   }
 }
 
-// ====== INIT ======
+// Bottom nav actions
 document.addEventListener("DOMContentLoaded", () => {
-  loadVideos();   // Reels
+  loadVideos();
 
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length === 4) {
