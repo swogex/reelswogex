@@ -20,12 +20,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-7T1QSE879V'); // Fixed ID
+    gtag('config', 'G-7T1QSE879V'); 
   </script>
 </head>
 <body>
 
-  <!-- Header New Style -->
+  <!-- Header -->
   <header>
     <img src="assets/img/logo.png" class="logo" alt="Logo">
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
@@ -46,7 +46,7 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
 
-  <!-- Fixed Footer Ad with Close Button -->
+  <!-- Fixed Footer Ad -->
   <script type="text/javascript">
     $(document).ready(function() {
       $("img#closed").click(function() {
@@ -55,18 +55,9 @@
     });
   </script>
 
-  <div id="fixedban" style="width:100%;margin:auto;text-align:center;float:none;overflow:hidden;position:fixed;top:0;z-index:999;
-    transform:translateZ(0);
-    -webkit-transform:translateZ(0);
-    -moz-transform:translateZ(0);
-    -ms-transform:translateZ(0);
-    -o-transform:translateZ(0);">
-    <div id="bl_banner" style="text-align:center;display:block;max-width:728px;height:auto;overflow:hidden;margin:auto;position:relative;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
-      
-      <!-- Close Button -->
+  <div id="fixedban" style="width:100%;margin:auto;text-align:center;position:fixed;top:0;z-index:999;">
+    <div id="bl_banner" style="text-align:center;max-width:728px;margin:auto;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
       <img id="closed" src="assets/icons/close.png" alt="Close" style="position:absolute;top:5px;right:5px;width:18px;height:18px;cursor:pointer;">
-
-      <!-- Ad Code -->
       <script type="text/javascript">
         atOptions = {
           'key' : 'beb4357a9f3e3cb4ad23051f64297ec4',
@@ -80,17 +71,16 @@
     </div>
   </div>
 
-  <!-- New JS -->
+  <!-- Main JS -->
   <script>
     window.WORKER_BASE = "https://reel-hub.govty02.workers.dev";
-    let reelCount = 0;
 
     async function loadVideos() {
       const container = document.getElementById("reelContainer");
       container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
 
       try {
-        const res = await fetch(window.WORKER_BASE);
+        const res = await fetch(window.WORKER_BASE + "/videos"); // ✅ FIXED
         const data = await res.json();
         container.innerHTML = "";
 
@@ -100,12 +90,12 @@
         }
 
         data.videos.forEach(video => {
-          reelCount++;
           const reel = document.createElement("div");
           reel.className = "reel";
 
           reel.innerHTML = `
             <video class="reel-video" src="${video.url}" autoplay loop muted playsinline></video>
+            <div class="loading-overlay">⏳</div>
             <div class="footer-tags">#hot #desi #bhabhi</div>
             <div class="play-pause-btn">▶</div>
             <div class="right-icons">
@@ -123,26 +113,51 @@
           const audioBtn = reel.querySelector(".audio-btn");
           const audioImg = audioBtn.querySelector("img");
 
+          // Loader remove when video is ready
+          vidEl.addEventListener("loadeddata", () => {
+            reel.querySelector(".loading-overlay")?.remove();
+          });
+
+          // Play/Pause toggle
           const toggleVideo = () => {
-            if (vidEl.paused) { vidEl.play().catch(err=>{}); playBtn.style.display="none"; }
-            else { vidEl.pause(); playBtn.style.display="flex"; }
+            if (vidEl.paused) {
+              vidEl.play().catch(()=>{});
+              playBtn.style.display="none";
+            } else {
+              vidEl.pause();
+              playBtn.style.display="flex";
+            }
           };
           vidEl.addEventListener("click", toggleVideo);
           playBtn.addEventListener("click", toggleVideo);
 
+          // Audio toggle
           audioBtn.addEventListener("click", () => {
             vidEl.muted = !vidEl.muted;
             audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
           });
 
-          reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
-          reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
-          reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
-
           container.appendChild(reel);
         });
+
+        // ✅ Only one reel play at a time
+        function handleScrollPause() {
+          const reels = document.querySelectorAll(".reel-video");
+          reels.forEach(v => {
+            const rect = v.getBoundingClientRect();
+            const fullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+            if (fullyVisible) {
+              v.play().catch(()=>{});
+            } else {
+              v.pause();
+            }
+          });
+        }
+        window.addEventListener("scroll", handleScrollPause);
+        handleScrollPause();
+
       } catch (err) {
-        console.error(err);
+        console.error("Error loading videos:", err);
         container.innerHTML = "<p>⚠️ वीडियो लोड नहीं हो पाए।</p>";
       }
     }
