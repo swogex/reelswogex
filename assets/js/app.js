@@ -1,4 +1,4 @@
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // aapka worker URL
+window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // worker URL
 let reelCount = 0;
 let currentPlaying = null; // currently visible video
 
@@ -16,6 +16,7 @@ async function loadVideos() {
       return;
     }
 
+    // सभी videos append करो
     data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
@@ -40,13 +41,14 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Ensure autoplay on load
+      // Autoplay ensure
       vidEl.addEventListener("canplay", () => {
-        if (!vidEl.paused) return;
-        vidEl.play().catch(() => {});
+        if (vidEl.paused) {
+          vidEl.play().catch(() => {});
+        }
       });
 
-      // Play / Pause with icon toggle
+      // Play / Pause
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
@@ -61,13 +63,12 @@ async function loadVideos() {
 
       // Audio toggle
       audioBtn.addEventListener("click", () => {
-        const isMuted = vidEl.muted;
-        vidEl.muted = !isMuted;
+        vidEl.muted = !vidEl.muted;
         vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
         audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
-      // Like / Comment / Share
+      // Like / Comment / Share (demo only)
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
@@ -80,7 +81,7 @@ async function loadVideos() {
     // -----------------------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
-      return rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+      return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
     }
 
     function handleScrollPause() {
@@ -111,9 +112,9 @@ async function loadVideos() {
       });
     }
 
-    window.addEventListener("scroll", handleScrollPause);
-    setInterval(handleScrollPause, 500); // safety
-    handleScrollPause(); // initial
+    window.addEventListener("scroll", handleScrollPause, { passive: true });
+    setInterval(handleScrollPause, 800); // safety check
+    handleScrollPause(); // initial run
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
