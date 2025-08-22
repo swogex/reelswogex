@@ -7,7 +7,7 @@ async function loadVideos() {
   container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
 
   try {
-    const res = await fetch(window.WORKER_BASE);
+    const res = await fetch(window.WORKER_BASE + "/videos");
     const data = await res.json();
     container.innerHTML = "";
 
@@ -22,7 +22,7 @@ async function loadVideos() {
       reel.className = "reel";
 
       reel.innerHTML = `
-        <video class="reel-video" src="${video.url}" autoplay loop muted playsinline></video>
+        <video class="reel-video" src="${video.url}" autoplay loop muted playsinline preload="auto"></video>
         <div class="footer-tags">#hot #desi #bhabhi</div>
         <div class="play-pause-btn">⏸</div>
         <div class="right-icons">
@@ -39,6 +39,12 @@ async function loadVideos() {
       const playBtn = reel.querySelector(".play-pause-btn");
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
+
+      // Ensure autoplay on load
+      vidEl.addEventListener("canplay", () => {
+        if (!vidEl.paused) return;
+        vidEl.play().catch(() => {});
+      });
 
       // Play / Pause with icon toggle
       const toggleVideo = () => {
@@ -74,7 +80,7 @@ async function loadVideos() {
     // -----------------------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
-      return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+      return rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
     }
 
     function handleScrollPause() {
@@ -85,7 +91,6 @@ async function loadVideos() {
         const audioBtnImg = reel.querySelector(".audio-btn img");
 
         if (isInViewport(video)) {
-          // Auto-play visible video
           if (currentPlaying && currentPlaying !== video) {
             currentPlaying.pause();
             const prevPlayBtn = currentPlaying.closest(".reel").querySelector(".play-pause-btn");
