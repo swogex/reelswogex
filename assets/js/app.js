@@ -1,4 +1,4 @@
-window.WORKER_BASE = "https://reel-hub.yesnoox.com"; // worker URL
+window.WORKER_BASE = "https://reel-hub.govty02.workers.dev/"; // worker URL
 let reelCount = 0;
 let currentPlaying = null; // currently visible video
 
