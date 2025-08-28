@@ -133,3 +133,70 @@ document.addEventListener("DOMContentLoaded", () => {
     btns[3].onclick = () => alert("Login feature coming soon.");
   }
 });
+//app install
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // ✅ Custom Popup Create
+  const popup = document.createElement("div");
+  popup.id = "installPopup";
+  popup.innerHTML = `
+    <div style="
+      position:fixed;
+      bottom:65px;
+      left:0;
+      right:0;
+      background:#000;
+      color:#fff;
+      padding:12px;
+      text-align:center;
+      font-family:Arial, sans-serif;
+      font-size:14px;
+      z-index:9999;
+      box-shadow:0 -2px 8px rgba(0,0,0,0.4);
+    ">
+      Install DesiSukh App?
+      <button id="installBtn" style="
+        margin-left:10px;
+        padding:6px 12px;
+        background:#ff2d55;
+        color:#fff;
+        border:none;
+        border-radius:4px;
+        cursor:pointer;
+      ">Install</button>
+      <button id="closeBtn" style="
+        margin-left:8px;
+        padding:6px 10px;
+        background:#444;
+        color:#fff;
+        border:none;
+        border-radius:4px;
+        cursor:pointer;
+      ">Close</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+
+  // ✅ Install Button Click
+  document.getElementById("installBtn").addEventListener("click", () => {
+    popup.remove();
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choice) => {
+      if (choice.outcome === "accepted") {
+        console.log("✅ User installed DesiSukh App");
+      } else {
+        console.log("❌ User dismissed install");
+      }
+      deferredPrompt = null;
+    });
+  });
+
+  // ❌ Close Button
+  document.getElementById("closeBtn").addEventListener("click", () => {
+    popup.remove();
+  });
+});
