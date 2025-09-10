@@ -1,4 +1,4 @@
-window.WORKER_BASE = "https://swogextelegram.webkhabrinews.workers.dev/"; // बिना स्लैश
+window.WORKER_BASE = "https://swogextelegram.webkhabrinews.workers.dev"; // बिना स्लैश
 let reelCount = 0;
 let currentPlaying = null; // currently visible video
 
