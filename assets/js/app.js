@@ -24,7 +24,7 @@ async function loadVideos() {
 
       reel.innerHTML = `
         <video class="reel-video" src="${video.url}" autoplay loop muted playsinline preload="auto"></video>
-        <div class="footer-tags">#hot #desi #bhabhi</div>
+        <div class="footer-tags">#xxx #desi #sex #bhabhi #village girl #mms</div>
         <div class="play-pause-btn">⏸</div>
         <div class="right-icons">
           <div class="icon-btn like-btn"><img src="assets/icons/like.png"><span>120</span></div>
