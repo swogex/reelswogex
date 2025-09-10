@@ -1,10 +1,10 @@
 {
-  "name": "DesiSukh",
-  "short_name": "DesiSukh",
+  "name": "swogex",
+  "short_name": "swogex",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#ff2d55",
+  "theme_color": "#1c9400",
   "orientation": "portrait",
   "icons": [
     {

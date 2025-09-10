@@ -16,7 +16,7 @@ async function loadVideos() {
       return;
     }
 
-    // सभी videos append करो
+
     data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
@@ -158,7 +158,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
       z-index:9999;
       box-shadow:0 -2px 8px rgba(0,0,0,0.4);
     ">
-      Install DesiSukh App?
+      Install swogex App?
       <button id="installBtn" style="
         margin-left:10px;
         padding:6px 12px;
@@ -187,7 +187,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choice) => {
       if (choice.outcome === "accepted") {
-        console.log("✅ User installed DesiSukh App");
+        console.log("✅ User installed swogex App");
       } else {
         console.log("❌ User dismissed install");
       }

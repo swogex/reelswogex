@@ -1,0 +1,11 @@
+# Account 1: webkhabrinews
+Host github-webkhabri
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_webkhabrinews
+
+# Account 2: govty02-sys
+Host github-govty
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
