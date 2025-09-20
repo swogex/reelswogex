@@ -3,13 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-
   <title>swogex</title>
   <meta name="description" content="Indian sex reels - Watch thousands of Indian, Tamil sex reels, desi girls reels and bhabhi xxx videos." />
   <meta name="robots" content="index, follow" />
-
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
-
   <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- jQuery CDN -->
@@ -28,15 +25,30 @@
   <meta name="theme-color" content="#1c9400"/>
 </head>
 <body>
-
   <!-- Header -->
   <header>
     <img src="assets/img/logo.png" class="logo" alt="Logo">
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
+  <!-- ✅ Top Banner Ad -->
+  <div id="fixedban" style="width:100%;margin:auto;text-align:center;position:fixed;top:0;z-index:999;">
+    <div style="text-align:center;max-width:728px;margin:auto;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'e83ec42dfa1439a7f37c03f8ae0add13',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/e83ec42dfa1439a7f37c03f8ae0add13/invoke.js"></script>
+    </div>
+  </div>
+
   <!-- Main Scroll Container -->
-  <main>
+  <main style="margin-top:70px;"> <!-- ✅ margin-top दिया ताकि एड से content न छिपे -->
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
     </div>
@@ -49,45 +61,6 @@
     <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
-
-  <!-- Fixed Header Ad (Always visible at top) -->
-  <div id="fixedban" style="width:100%;margin:auto;text-align:center;position:fixed;top:0;z-index:999;">
-    <div id="bl_banner" style="text-align:center;max-width:728px;margin:auto;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);position:relative;">
-      <img id="closed" src="assets/icons/close.png" alt="Close" style="position:absolute;top:5px;right:5px;width:18px;height:18px;cursor:pointer;">
-      <!-- ✅ First RevenueCPM ad -->
-      <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
-    </div>
-  </div>
-
-  <!-- ✅ Second RevenueCPM ad (10 sec delay) -->
-  <div id="secondAd" style="display:none;position:fixed;bottom:65px;left:0;right:0;text-align:center;z-index:9999;">
-    <div style="position:relative;max-width:728px;margin:auto;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
-      <img id="closeSecondAd" src="assets/icons/close.png" alt="Close" style="position:absolute;top:5px;right:5px;width:18px;height:18px;cursor:pointer;">
-      <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"></script>
-      <div id="container-555e447ee3bcb7553f2d7ad6696e6aac"></div>
-    </div>
-  </div>
-
-  <script>
-    // Close first ad
-    $(document).ready(function() {
-      $("img#closed").click(function() {
-        $("#bl_banner").hide(90);
-      });
-    });
-
-    // Show second ad after 10 seconds
-    setTimeout(() => {
-      document.getElementById("secondAd").style.display = "block";
-    }, 10000);
-
-    // Close second ad
-    document.addEventListener("click", function(e) {
-      if(e.target && e.target.id === "closeSecondAd"){
-        document.getElementById("secondAd").remove();
-      }
-    });
-  </script>
 
   <!-- ✅ Main JS -->
   <script src="assets/js/app.js"></script>
