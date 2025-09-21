@@ -16,8 +16,8 @@ async function loadVideos() {
       return;
     }
 
-    // include index (i) so we can inject inline ads after every 4 reels
-    data.videos.forEach((video, i) => {
+    // loop through videos without injecting any inline ads
+    data.videos.forEach((video) => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -75,31 +75,8 @@ async function loadVideos() {
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
-      // Append the reel first
+      // Append the reel
       container.appendChild(reel);
-
-      // -----------------------------
-      // Inject mid-content ad after every 4 reels
-      // -----------------------------
-      if (i > 0 && i % 4 === 0) {
-        const adDiv = document.createElement("div");
-        adDiv.className = "inline-ad";
-        adDiv.innerHTML = `<div id="inlineAd-${i}"></div>`;
-        container.appendChild(adDiv);
-
-        // delay ad script injection
-        setTimeout(() => {
-          try {
-            const script = document.createElement("script");
-            script.src = "https://pl27684641.revenuecpmgate.com/inline/invoke.js"; // ✅ FIXED
-            script.async = true;
-            const slot = document.getElementById(`inlineAd-${i}`);
-            if (slot) slot.appendChild(script);
-          } catch (e) {
-            console.error("Inline ad inject failed for index", i, e);
-          }
-        }, 5000);
-      }
     });
 
     // -----------------------------
