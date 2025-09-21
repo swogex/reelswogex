@@ -16,7 +16,6 @@ async function loadVideos() {
       return;
     }
 
-
     data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
@@ -76,9 +75,7 @@ async function loadVideos() {
       container.appendChild(reel);
     });
 
-    // -----------------------------
     // Scroll / Auto-Pause Handler
-    // -----------------------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
@@ -113,8 +110,8 @@ async function loadVideos() {
     }
 
     window.addEventListener("scroll", handleScrollPause, { passive: true });
-    setInterval(handleScrollPause, 800); // safety check
-    handleScrollPause(); // initial run
+    setInterval(handleScrollPause, 800);
+    handleScrollPause();
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
@@ -133,14 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
     btns[3].onclick = () => alert("Login feature coming soon.");
   }
 });
-//app install
-let deferredPrompt;
 
+// app install
+let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // ✅ Custom Popup Create
   const popup = document.createElement("div");
   popup.id = "installPopup";
   popup.innerHTML = `
@@ -181,7 +177,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
   `;
   document.body.appendChild(popup);
 
-  // ✅ Install Button Click
   document.getElementById("installBtn").addEventListener("click", () => {
     popup.remove();
     deferredPrompt.prompt();
@@ -195,12 +190,12 @@ window.addEventListener("beforeinstallprompt", (e) => {
     });
   });
 
-  // ❌ Close Button
   document.getElementById("closeBtn").addEventListener("click", () => {
     popup.remove();
   });
 });
-//service worker
+
+// service worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js")
     .then(() => console.log("✅ Service Worker registered"))
