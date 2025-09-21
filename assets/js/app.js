@@ -16,7 +16,7 @@ async function loadVideos() {
       return;
     }
 
-    // NOTE: include index (i) so we can inject inline ads after every 4 reels
+    // include index (i) so we can inject inline ads after every 4 reels
     data.videos.forEach((video, i) => {
       reelCount++;
       const reel = document.createElement("div");
@@ -79,26 +79,23 @@ async function loadVideos() {
       container.appendChild(reel);
 
       // -----------------------------
-      // Inject mid-content ad after every 4 reels (keeps original flow)
+      // Inject mid-content ad after every 4 reels
       // -----------------------------
-      // i is zero-based; inject after reels 4,8,12... (i % 4 === 3 would be after appending the 4th),
-      // but your earlier logic used i%4===0 with condition i>0; replicating that behaviour:
       if (i > 0 && i % 4 === 0) {
         const adDiv = document.createElement("div");
         adDiv.className = "inline-ad";
         adDiv.innerHTML = `<div id="inlineAd-${i}"></div>`;
         container.appendChild(adDiv);
 
-        // delay ad script injection slightly to avoid blocking render
+        // delay ad script injection
         setTimeout(() => {
           try {
             const script = document.createElement("script");
-            script.src = "//pl27684641.revenuecpmgate.com/inline/invoke.js";
+            script.src = "https://pl27684641.revenuecpmgate.com/inline/invoke.js"; // ✅ FIXED
             script.async = true;
             const slot = document.getElementById(`inlineAd-${i}`);
             if (slot) slot.appendChild(script);
           } catch (e) {
-            // fail silently; do not break app
             console.error("Inline ad inject failed for index", i, e);
           }
         }, 5000);
@@ -143,8 +140,8 @@ async function loadVideos() {
     }
 
     window.addEventListener("scroll", handleScrollPause, { passive: true });
-    setInterval(handleScrollPause, 800); // safety check
-    handleScrollPause(); // initial run
+    setInterval(handleScrollPause, 800);
+    handleScrollPause();
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
@@ -169,7 +166,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // ✅ Custom Popup Create
   const popup = document.createElement("div");
   popup.id = "installPopup";
   popup.innerHTML = `
@@ -189,7 +185,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
   `;
   document.body.appendChild(popup);
 
-  // ✅ Install Button Click
   document.getElementById("installBtn").addEventListener("click", () => {
     popup.remove();
     deferredPrompt.prompt();
@@ -203,7 +198,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
     });
   });
 
-  // ❌ Close Button
   document.getElementById("closeBtn").addEventListener("click", () => {
     popup.remove();
   });
