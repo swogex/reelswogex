@@ -9,7 +9,6 @@
   <meta name="robots" content="index, follow" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
-
   <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- jQuery CDN -->
@@ -50,13 +49,11 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
       
-      <!-- ✅ First Ad (RevenueCPM) -->
-      <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
+  <!-- ✅ First Ad (RevenueCPM) -->
+  <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
 
-      <!-- ✅ Placeholder for second ad -->
-      <div id="secondAd"></div>
-    </div>
-  </div>
+  <!-- ✅ Placeholder for second ad -->
+  <div id="secondAd"></div>
 
   <!-- ✅ Main JS -->
   <script src="assets/js/app.js"></script>
@@ -64,11 +61,20 @@
   <!-- ✅ Second Ad load after 10s -->
   <script>
     setTimeout(() => {
-      const adCode = `
-        <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"><\/script>
-        <div id="container-555e447ee3bcb7553f2d7ad6696e6aac"></div>
-      `;
-      document.getElementById("secondAd").innerHTML = adCode;
+      // ad container div
+      const adDiv = document.createElement("div");
+      adDiv.id = "container-555e447ee3bcb7553f2d7ad6696e6aac";
+
+      // ad script
+      const adScript = document.createElement("script");
+      adScript.async = true;
+      adScript.setAttribute("data-cfasync", "false");
+      adScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
+
+      // append to placeholder
+      const placeholder = document.getElementById("secondAd");
+      placeholder.appendChild(adScript);
+      placeholder.appendChild(adDiv);
     }, 10000);
   </script>
 
