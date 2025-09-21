@@ -16,7 +16,8 @@ async function loadVideos() {
       return;
     }
 
-    data.videos.forEach(video => {
+    // NOTE: include index (i) so we can inject inline ads after every 4 reels
+    data.videos.forEach((video, i) => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -74,7 +75,34 @@ async function loadVideos() {
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
+      // Append the reel first
       container.appendChild(reel);
+
+      // -----------------------------
+      // Inject mid-content ad after every 4 reels (keeps original flow)
+      // -----------------------------
+      // i is zero-based; inject after reels 4,8,12... (i % 4 === 3 would be after appending the 4th),
+      // but your earlier logic used i%4===0 with condition i>0; replicating that behaviour:
+      if (i > 0 && i % 4 === 0) {
+        const adDiv = document.createElement("div");
+        adDiv.className = "inline-ad";
+        adDiv.innerHTML = `<div id="inlineAd-${i}"></div>`;
+        container.appendChild(adDiv);
+
+        // delay ad script injection slightly to avoid blocking render
+        setTimeout(() => {
+          try {
+            const script = document.createElement("script");
+            script.src = "//pl27684641.revenuecpmgate.com/inline/invoke.js";
+            script.async = true;
+            const slot = document.getElementById(`inlineAd-${i}`);
+            if (slot) slot.appendChild(script);
+          } catch (e) {
+            // fail silently; do not break app
+            console.error("Inline ad inject failed for index", i, e);
+          }
+        }, 5000);
+      }
     });
 
     // -----------------------------
@@ -135,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// app install
+//app install
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -187,4 +215,3 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("✅ Service Worker registered"))
     .catch(err => console.error("❌ SW registration failed:", err));
 }
-

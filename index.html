@@ -4,17 +4,25 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-  <title>swogex</title>
-  <meta name="description" content="Indian sex reels - Watch thousands of Indian, Tamil sex reels, desi girls reels and bhabhi xxx videos." />
+  <title>Swogex – Desi Reels, Indian MMS & Bhabhi Videos</title>
+  <meta name="description" content="Watch trending Indian sex reels, Tamil MMS, desi bhabhi videos & village girl reels. Swogex provides nonstop hot reels with smooth streaming." />
   <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="Indian reels, Tamil MMS, Desi bhabhi, Swogex videos, hot sex reels, desi xxx" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Swogex – Hot Desi Reels" />
+  <meta property="og:description" content="Thousands of desi MMS & bhabhi reels streaming nonstop." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/img/preview.png" />
+  <meta property="og:url" content="https://swogex.site" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- jQuery CDN -->
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XEF4MDRDL4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -30,16 +38,22 @@
 
   <!-- Header -->
   <header>
-    <img src="assets/img/logo.png" class="logo" alt="Logo">
+    <img src="assets/img/logo.png" class="logo" alt="Swogex Logo">
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- Main Scroll Container -->
+  <!-- ✅ Top Banner Ad -->
+  <div class="ad-slot" id="topAd"></div>
+
+  <!-- Main -->
   <main>
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
     </div>
   </main>
+
+  <!-- ✅ Mid-roll Ad -->
+  <div class="ad-slot" id="midAd"></div>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
@@ -49,33 +63,34 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
       
-  <!-- ✅ First Ad (RevenueCPM) -->
-  <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
-
-  <!-- ✅ Placeholder for second ad -->
-  <div id="secondAd"></div>
+  <!-- ✅ Sticky Footer Ad -->
+  <div class="ad-slot" id="bottomAd"></div>
 
   <!-- ✅ Main JS -->
   <script src="assets/js/app.js"></script>
 
-  <!-- ✅ Second Ad load after 10s -->
+  <!-- ✅ Ads Loader -->
   <script>
+    function loadAd(id, src) {
+      const div = document.getElementById(id);
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = src;
+      div.appendChild(script);
+    }
+
+    // Top Ad (Instant)
+    loadAd("topAd", "//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js");
+
+    // Mid Ad (After 15s)
     setTimeout(() => {
-      // ad container div
-      const adDiv = document.createElement("div");
-      adDiv.id = "container-555e447ee3bcb7553f2d7ad6696e6aac";
+      loadAd("midAd", "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js");
+    }, 15000);
 
-      // ad script
-      const adScript = document.createElement("script");
-      adScript.async = true;
-      adScript.setAttribute("data-cfasync", "false");
-      adScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
-
-      // append to placeholder
-      const placeholder = document.getElementById("secondAd");
-      placeholder.appendChild(adScript);
-      placeholder.appendChild(adDiv);
-    }, 10000);
+    // Bottom Ad (Sticky after 20s)
+    setTimeout(() => {
+      loadAd("bottomAd", "//pl27684641.revenuecpmgate.com/cd5c2c22d5/invoke.js");
+    }, 20000);
   </script>
 
 </body>
