@@ -42,8 +42,10 @@
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- ✅ Top Banner Ad -->
-  <div class="ad-slot" id="topAd"></div>
+  <!-- ✅ Top Banner Ad (normal script) -->
+  <div class="ad-slot" id="topAd">
+    <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
+  </div>
 
   <!-- Main -->
   <main>
@@ -52,8 +54,11 @@
     </div>
   </main>
 
-  <!-- ✅ Mid-roll Ad -->
-  <div class="ad-slot" id="midAd"></div>
+  <!-- ✅ Mid-roll / Social banner -->
+  <div class="ad-slot" id="midAd">
+    <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"></script>
+    <div id="container-555e447ee3bcb7553f2d7ad6696e6aac"></div>
+  </div>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
@@ -62,36 +67,15 @@
     <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
-      
-  <!-- ✅ Sticky Footer Ad -->
-  <div class="ad-slot" id="bottomAd"></div>
+
+  <!-- ✅ Sticky Footer / Native Banner (optional, reuse midAd script if needed) -->
+  <div class="ad-slot" id="bottomAd">
+    <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"></script>
+    <div id="container-555e447ee3bcb7553f2d7ad6696e6aac-footer"></div>
+  </div>
 
   <!-- ✅ Main JS -->
   <script src="assets/js/app.js"></script>
-
-  <!-- ✅ Ads Loader -->
-  <script>
-    function loadAd(id, src) {
-      const div = document.getElementById(id);
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = src;
-      div.appendChild(script);
-    }
-
-    // Top Ad (Instant)
-    loadAd("topAd", "https://pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js");
-
-    // Mid Ad (After 15s)
-    setTimeout(() => {
-      loadAd("midAd", "https://pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js");
-    }, 15000);
-
-    // Bottom Ad (Sticky after 20s)
-    setTimeout(() => {
-      loadAd("bottomAd", "https://pl27684641.revenuecpmgate.com/cd5c2c22d5/invoke.js");
-    }, 20000);
-  </script>
 
 </body>
 </html>
