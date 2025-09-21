@@ -9,27 +9,10 @@
   <meta name="robots" content="index, follow" />
   <meta name="keywords" content="Indian reels, Tamil MMS, Desi bhabhi, Swogex videos, hot sex reels, desi xxx" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Swogex – Hot Desi Reels" />
-  <meta property="og:description" content="Thousands of desi MMS & bhabhi reels streaming nonstop." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/assets/img/preview.png" />
-  <meta property="og:url" content="https://swogex.site" />
-
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XEF4MDRDL4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XEF4MDRDL4');
-  </script>
 
   <link rel="manifest" href="assets/manifest.json">
   <meta name="theme-color" content="#1c9400"/>
@@ -42,10 +25,8 @@
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- ✅ Top Banner Ad (normal script) -->
-  <div class="ad-slot" id="topAd">
-    <script type='text/javascript' src='//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js'></script>
-  </div>
+  <!-- Top Banner Ad -->
+  <div class="ad-slot" id="topAd"></div>
 
   <!-- Main -->
   <main>
@@ -54,11 +35,8 @@
     </div>
   </main>
 
-  <!-- ✅ Mid-roll / Social banner -->
-  <div class="ad-slot" id="midAd">
-    <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"></script>
-    <div id="container-555e447ee3bcb7553f2d7ad6696e6aac"></div>
-  </div>
+  <!-- Mid / Social Banner -->
+  <div class="ad-slot" id="midAd"></div>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
@@ -68,14 +46,45 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
 
-  <!-- ✅ Sticky Footer / Native Banner (optional, reuse midAd script if needed) -->
-  <div class="ad-slot" id="bottomAd">
-    <script async="async" data-cfasync="false" src="//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js"></script>
-    <div id="container-555e447ee3bcb7553f2d7ad6696e6aac-footer"></div>
-  </div>
+  <!-- Bottom / Native Banner -->
+  <div class="ad-slot" id="bottomAd"></div>
 
-  <!-- ✅ Main JS -->
+  <!-- Main JS -->
   <script src="assets/js/app.js"></script>
+
+  <!-- ✅ Safe DOM-ready Ads Loader -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Top Ad
+      const topAdDiv = document.getElementById("topAd");
+      const topScript = document.createElement("script");
+      topScript.type = "text/javascript";
+      topScript.src = "//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js";
+      topAdDiv.appendChild(topScript);
+
+      // Mid / Social Banner
+      const midAdDiv = document.getElementById("midAd");
+      const midScript = document.createElement("script");
+      midScript.async = true;
+      midScript.setAttribute("data-cfasync", "false");
+      midScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
+      midAdDiv.appendChild(midScript);
+      const midContainer = document.createElement("div");
+      midContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac";
+      midAdDiv.appendChild(midContainer);
+
+      // Bottom / Native Banner
+      const bottomAdDiv = document.getElementById("bottomAd");
+      const bottomScript = document.createElement("script");
+      bottomScript.async = true;
+      bottomScript.setAttribute("data-cfasync", "false");
+      bottomScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
+      bottomAdDiv.appendChild(bottomScript);
+      const bottomContainer = document.createElement("div");
+      bottomContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac-footer";
+      bottomAdDiv.appendChild(bottomContainer);
+    });
+  </script>
 
 </body>
 </html>
