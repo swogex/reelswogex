@@ -1,15 +1,9 @@
-/* ===============================
-   🎨 Root Variables
-==================================*/
 :root {
   --bg: transparent;
   --text: #fff;
   --accent: #ff2d55;
 }
 
-/* ===============================
-   🛠️ Global Reset
-==================================*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,9 +17,7 @@ html, body, main {
   font-family: Arial, sans-serif;
 }
 
-/* ===============================
-   📜 Scroll Container
-==================================*/
+/* Scroll Container */
 .scroll-container {
   position: relative;
   overflow-y: auto;
@@ -34,9 +26,7 @@ html, body, main {
   padding-bottom: 56px;
 }
 
-/* ===============================
-   🎥 Reel
-==================================*/
+/* Reel */
 .reel {
   scroll-snap-align: start;
   position: relative;
@@ -58,9 +48,7 @@ video::-webkit-media-controls-enclosure {
   display: none;
 }
 
-/* ===============================
-   ▶️ Play/Pause
-==================================*/
+/* Play/Pause */
 .play-pause-btn {
   position: absolute;
   top: 50%; left: 50%;
@@ -74,9 +62,7 @@ video::-webkit-media-controls-enclosure {
   cursor: pointer; z-index: 10;
 }
 
-/* ===============================
-   🏷️ Footer Tags
-==================================*/
+/* Footer Tags */
 .footer-tags {
   position: absolute; bottom: 80px; left: 12px;
   font-size: 14px; color: #fff;
@@ -84,9 +70,7 @@ video::-webkit-media-controls-enclosure {
   padding: 5px 10px; border-radius: 6px;
 }
 
-/* ===============================
-   📌 Right Side Icons + Audio
-==================================*/
+/* Right Side Icons + Audio */
 .right-icons {
   position: absolute; right: 12px; top: 50%;
   transform: translateY(-50%);
@@ -113,9 +97,7 @@ video::-webkit-media-controls-enclosure {
 }
 .audio-btn img { width: 28px; height: 28px; }
 
-/* ===============================
-   🖥️ Header
-==================================*/
+/* Header */
 header {
   position: fixed; top: 0; left: 0; right: 0;
   height: 56px; background: transparent;
@@ -126,9 +108,7 @@ header img.logo { height: 36px; object-fit: contain; }
 header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s infinite; }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
-/* ===============================
-   📱 Bottom Navigation
-==================================*/
+/* Bottom Navigation */
 .bottom-nav {
   position: fixed; left: 0; right: 0; bottom: 0; height: 56px;
   background: #000; display: flex; justify-content: space-around; align-items: center; z-index: 45;
@@ -140,7 +120,5 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
 }
 .bottom-nav button img { width: 24px; height: 24px; object-fit: contain; }
 
-/* ===============================
-   ⏳ Loading
-==================================*/
+/* Loading */
 .loading { padding: 20px; text-align: center; color: #ccc; }

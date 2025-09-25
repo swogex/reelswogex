@@ -4,49 +4,42 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-  <title>Swogex – Desi Reels, Indian MMS & Bhabhi Videos</title>
-  <meta name="description" content="Watch trending Indian sex reels, Tamil MMS, desi bhabhi videos & village girl reels. Swogex provides nonstop hot reels with smooth streaming." />
+  <title>swogex</title>
+  <meta name="description" content="Indian sex reels - Watch thousands of Indian, Tamil sex reels, desi girls reels and bhabhi xxx videos." />
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="Indian reels, Tamil MMS, Desi bhabhi, Swogex videos, hot sex reels, desi xxx" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 
+  <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XEF4MDRDL4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XEF4MDRDL4');
+  </script>
 
   <link rel="manifest" href="assets/manifest.json">
   <meta name="theme-color" content="#1c9400"/>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XEF4MDRDL4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XEF4MDRDL4');
-</script>
-
 </head>
 <body>
 
   <!-- Header -->
   <header>
-    <img src="assets/img/logo.png" class="logo" alt="Swogex Logo">
+    <img src="assets/img/logo.png" class="logo" alt="Logo">
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- Top Banner Ad -->
-  <div class="ad-slot" id="topAd"></div>
-
-  <!-- Main -->
+  <!-- Main Scroll Container -->
   <main>
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
     </div>
   </main>
-
-  <!-- Mid / Social Banner -->
-  <div class="ad-slot" id="midAd"></div>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
@@ -56,45 +49,32 @@
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
   </nav>
 
-  <!-- Bottom / Native Banner -->
-  <div class="ad-slot" id="bottomAd"></div>
-
-  <!-- Main JS -->
-  <script src="assets/js/app.js"></script>
-
-  <!-- ✅ Safe DOM-ready Ads Loader -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Top Ad
-      const topAdDiv = document.getElementById("topAd");
-      const topScript = document.createElement("script");
-      topScript.type = "text/javascript";
-      topScript.src = "//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js";
-      topAdDiv.appendChild(topScript);
-
-      // Mid / Social Banner
-      const midAdDiv = document.getElementById("midAd");
-      const midScript = document.createElement("script");
-      midScript.async = true;
-      midScript.setAttribute("data-cfasync", "false");
-      midScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
-      midAdDiv.appendChild(midScript);
-      const midContainer = document.createElement("div");
-      midContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac";
-      midAdDiv.appendChild(midContainer);
-
-      // Bottom / Native Banner
-      const bottomAdDiv = document.getElementById("bottomAd");
-      const bottomScript = document.createElement("script");
-      bottomScript.async = true;
-      bottomScript.setAttribute("data-cfasync", "false");
-      bottomScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
-      bottomAdDiv.appendChild(bottomScript);
-      const bottomContainer = document.createElement("div");
-      bottomContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac-footer";
-      bottomAdDiv.appendChild(bottomContainer);
+  <!-- Fixed Footer Ad -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("img#closed").click(function() {
+        $("#bl_banner").hide(90);
+      });
     });
   </script>
 
+  <div id="fixedban" style="width:100%;margin:auto;text-align:center;position:fixed;top:0;z-index:999;">
+    <div id="bl_banner" style="text-align:center;max-width:728px;margin:auto;background:#fff;padding:5px;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.2);">
+      <img id="closed" src="assets/icons/close.png" alt="Close" style="position:absolute;top:5px;right:5px;width:18px;height:18px;cursor:pointer;">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'e83ec42dfa1439a7f37c03f8ae0add13',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/e83ec42dfa1439a7f37c03f8ae0add13/invoke.js"></script>
+    </div>
+  </div>
+
+  <!-- ✅ Main JS -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
