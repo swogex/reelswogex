@@ -16,7 +16,8 @@ async function loadVideos() {
       return;
     }
 
-    data.videos.forEach(video => {
+    // loop through videos without injecting any inline ads
+    data.videos.forEach((video) => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -64,7 +65,9 @@ async function loadVideos() {
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
         vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
-        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
+        audioImg.src = vidEl.muted
+          ? "assets/icons/speaker-off.png"
+          : "assets/icons/speaker-on.png";
       });
 
       // Like / Comment / Share (demo only)
@@ -72,6 +75,7 @@ async function loadVideos() {
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
+      // Append the reel
       container.appendChild(reel);
     });
 
@@ -96,7 +100,8 @@ async function loadVideos() {
             const prevPlayBtn = currentPlaying.closest(".reel").querySelector(".play-pause-btn");
             prevPlayBtn.textContent = "▶";
             currentPlaying.muted = true;
-            currentPlaying.closest(".reel").querySelector(".audio-btn img").src = "assets/icons/speaker-off.png";
+            currentPlaying.closest(".reel").querySelector(".audio-btn img").src =
+              "assets/icons/speaker-off.png";
           }
           video.play().catch(() => {});
           if (!video.dataset.userUnmuted) video.muted = true;
@@ -112,8 +117,8 @@ async function loadVideos() {
     }
 
     window.addEventListener("scroll", handleScrollPause, { passive: true });
-    setInterval(handleScrollPause, 800); // safety check
-    handleScrollPause(); // initial run
+    setInterval(handleScrollPause, 800);
+    handleScrollPause();
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
@@ -123,7 +128,6 @@ async function loadVideos() {
 // Bottom nav actions
 document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
-
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length === 4) {
     btns[0].onclick = () => (window.location.href = "/");
@@ -139,48 +143,25 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // ✅ Custom Popup Create
   const popup = document.createElement("div");
   popup.id = "installPopup";
   popup.innerHTML = `
-    <div style="
-      position:fixed;
-      bottom:65px;
-      left:0;
-      right:0;
-      background:#000;
-      color:#fff;
-      padding:12px;
-      text-align:center;
-      font-family:Arial, sans-serif;
-      font-size:14px;
-      z-index:9999;
-      box-shadow:0 -2px 8px rgba(0,0,0,0.4);
-    ">
+    <div style="position:fixed; bottom:65px; left:0; right:0; background:#000; color:#fff;
+                padding:12px; text-align:center; font-family:Arial, sans-serif; font-size:14px;
+                z-index:9999; box-shadow:0 -2px 8px rgba(0,0,0,0.4);">
       Install swogex App?
-      <button id="installBtn" style="
-        margin-left:10px;
-        padding:6px 12px;
-        background:#ff2d55;
-        color:#fff;
-        border:none;
-        border-radius:4px;
-        cursor:pointer;
-      ">Install</button>
-      <button id="closeBtn" style="
-        margin-left:8px;
-        padding:6px 10px;
-        background:#444;
-        color:#fff;
-        border:none;
-        border-radius:4px;
-        cursor:pointer;
-      ">Close</button>
+      <button id="installBtn" style="margin-left:10px; padding:6px 12px; background:#ff2d55;
+                                     color:#fff; border:none; border-radius:4px; cursor:pointer;">
+        Install
+      </button>
+      <button id="closeBtn" style="margin-left:8px; padding:6px 10px; background:#444;
+                                    color:#fff; border:none; border-radius:4px; cursor:pointer;">
+        Close
+      </button>
     </div>
   `;
   document.body.appendChild(popup);
 
-  // ✅ Install Button Click
   document.getElementById("installBtn").addEventListener("click", () => {
     popup.remove();
     deferredPrompt.prompt();
@@ -194,13 +175,12 @@ window.addEventListener("beforeinstallprompt", (e) => {
     });
   });
 
-  // ❌ Close Button
   document.getElementById("closeBtn").addEventListener("click", () => {
     popup.remove();
   });
 });
 
-//service worker
+// service worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js")
     .then(() => console.log("✅ Service Worker registered"))
