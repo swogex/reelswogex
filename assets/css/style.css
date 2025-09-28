@@ -164,3 +164,16 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
 .btn:hover {
   background: #e02244;
 }
+/* =============================== Center Top / Mid / Bottom Ads =============================== */
+.ad-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  margin-top: 56px; /* header height के बाद */
+  margin-bottom: 12px;
+}
+
+.ad-slot > div {
+  max-width: 320px; /* ad container width */
+  width: 100%;
+}
