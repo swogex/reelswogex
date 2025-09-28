@@ -19,73 +19,37 @@ html, body, main {
 
 /* ================= Header ================= */
 header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 56px;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 56px; background: transparent;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px; z-index: 100;
 }
-
 header img.logo { height: 36px; object-fit: contain; }
 header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s infinite; }
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
 /* ================= Bottom Navigation ================= */
 .bottom-nav {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  height: 56px;
-  background: #000;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 100;
+  position: fixed; left: 0; right: 0; bottom: 0; height: 56px;
+  background: #000; display: flex; justify-content: space-around; align-items: center; z-index: 100;
 }
-
 .bottom-nav button {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 0;
+  background: transparent; border: none; color: #fff;
+  font-size: 10px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 0;
 }
-
-.bottom-nav button img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
+.bottom-nav button img { width: 24px; height: 24px; object-fit: contain; }
 
 /* ================= Loading ================= */
-.loading {
-  padding: 20px;
-  text-align: center;
-  color: #ccc;
-}
+.loading { padding: 20px; text-align: center; color: #ccc; }
 
-/* ================== Homepage Specific ================== */
+/* ================= Home Page ================= */
 .home-page .home-posts {
   display: grid;
   gap: 24px;
   padding: 20px;
   margin-top: 12px;
 }
-
 .home-page .post {
   background: rgba(0,0,0,0.6);
   border-radius: 10px;
@@ -94,20 +58,17 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-
 .home-page .post img {
   width: 100%;
   border-radius: 8px;
   margin: 12px 0;
 }
-
 .home-page .btn-group {
   display: flex;
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
-
 .home-page .btn {
   background: #ff2d55;
   padding: 10px 18px;
@@ -117,29 +78,25 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
   font-weight: bold;
   transition: background 0.3s ease;
 }
+.home-page .btn:hover { background: #e02244; }
 
-.home-page .btn:hover {
-  background: #e02244;
-}
-
-/* Homepage Top Ad */
+/* ================= Top Ad Home ================= */
 .home-page .ad-slot-top {
   width: 100%;
   display: flex;
-  justify-content: center;  /* horizontal center */
-  align-items: flex-start;  /* top alignment */
+  justify-content: center; 
+  align-items: flex-start; 
   position: relative;
   z-index: 50;
   padding: 12px 0;
   margin-top: 56px; /* header height */
 }
-
 .home-page .ad-slot-top > div {
   max-width: 320px;
   width: 100%;
 }
 
-/* ================== Reels Page Specific ================== */
+/* ================= Reels Page ================= */
 .reels-page .scroll-container {
   position: relative;
   overflow-y: auto;
@@ -165,9 +122,7 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
 }
 
 .reels-page video::-webkit-media-controls,
-.reels-page video::-webkit-media-controls-enclosure {
-  display: none;
-}
+.reels-page video::-webkit-media-controls-enclosure { display: none; }
 
 .reels-page .play-pause-btn {
   position: absolute;
@@ -214,5 +169,4 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
-
 .reels-page .audio-btn img { width: 28px; height: 28px; }
