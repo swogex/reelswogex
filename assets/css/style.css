@@ -17,86 +17,6 @@ html, body, main {
   font-family: Arial, sans-serif;
 }
 
-/* Scroll Container */
-.scroll-container {
-  position: relative;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  height: 100vh;
-  padding-bottom: 56px;
-}
-
-/* Reel */
-.reel {
-  scroll-snap-align: start;
-  position: relative;
-  height: calc(100vh - 56px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.reel-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: transparent;
-}
-
-video::-webkit-media-controls,
-video::-webkit-media-controls-enclosure {
-  display: none;
-}
-
-/* Play/Pause */
-.play-pause-btn {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.45);
-  border-radius: 50%;
-  width: 70px; height: 70px;
-  font-size: 28px;
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 10;
-}
-
-/* Footer Tags */
-.footer-tags {
-  position: absolute; bottom: 80px; left: 12px;
-  font-size: 14px; color: #fff;
-  background: rgba(0,0,0,0.5);
-  padding: 5px 10px; border-radius: 6px;
-}
-
-/* Right Side Icons + Audio */
-.right-icons {
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  display: flex; flex-direction: column; align-items: center;
-  gap: 20px; z-index: 15;
-}
-
-.icon-btn {
-  display: flex; flex-direction: column; align-items: center;
-  cursor: pointer; font-size: 14px; color: #fff;
-  transition: transform 0.2s ease;
-}
-
-.icon-btn img { width: 36px; height: 36px; }
-.icon-btn span { font-size: 12px; margin-top: 4px; }
-.icon-btn:hover { transform: scale(1.1); }
-
-.audio-btn {
-  width: 50px; height: 50px;
-  border: none; border-radius: 50%;
-  background: rgba(237, 238, 246, 0.53);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-}
-.audio-btn img { width: 28px; height: 28px; }
-
 /* Header */
 header {
   position: fixed; top: 0; left: 0; right: 0;
@@ -108,25 +28,12 @@ header img.logo { height: 36px; object-fit: contain; }
 header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s infinite; }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
-/* Bottom Navigation */
-.bottom-nav {
-  position: fixed; left: 0; right: 0; bottom: 0; height: 56px;
-  background: #000; display: flex; justify-content: space-around; align-items: center; z-index: 45;
-}
-.bottom-nav button {
-  background: transparent; border: none; color: #fff;
-  font-size: 10px; cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 0;
-}
-.bottom-nav button img { width: 24px; height: 24px; object-fit: contain; }
-
-/* Loading */
-.loading { padding: 20px; text-align: center; color: #ccc; }
-/* Home Page Posts */
+/* Home Posts */
 .home-posts {
   display: grid;
   gap: 24px;
   padding: 20px;
+  margin-top: 12px;
 }
 
 .post {
@@ -160,20 +67,33 @@ header img.live-icon { height: 32px; object-fit: contain; animation: pulse 1s in
   font-weight: bold;
   transition: background 0.3s ease;
 }
+.btn:hover { background: #e02244; }
 
-.btn:hover {
-  background: #e02244;
-}
-/* =============================== Center Top / Mid / Bottom Ads =============================== */
+/* =============================== Center Top Ad =============================== */
 .ad-slot {
   width: 100%;
   display: flex;
-  justify-content: center; /* horizontal center */
-  margin-top: 56px; /* header height के बाद */
-  margin-bottom: 12px;
+  justify-content: center;  /* horizontal center */
+  align-items: flex-start;  /* top alignment */
+  position: relative;
+  z-index: 50;
+  padding: 12px 0;
 }
+.ad-slot-top { margin-top: 56px; }  /* header height */
 
 .ad-slot > div {
-  max-width: 320px; /* ad container width */
+  max-width: 320px;
   width: 100%;
 }
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 56px;
+  background: #000; display: flex; justify-content: space-around; align-items: center; z-index: 100;
+}
+.bottom-nav button {
+  background: transparent; border: none; color: #fff;
+  font-size: 10px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 0;
+}
+.bottom-nav button img { width: 24px; height: 24px; object-fit: contain; }
