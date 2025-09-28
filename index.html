@@ -16,16 +16,6 @@
 
   <link rel="manifest" href="assets/manifest.json">
   <meta name="theme-color" content="#1c9400"/>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XEF4MDRDL4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XEF4MDRDL4');
-</script>
-
 </head>
 <body>
 
@@ -35,66 +25,60 @@
     <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
-  <!-- Top Banner Ad -->
-  <div class="ad-slot" id="topAd"></div>
-
-  <!-- Main -->
+  <!-- ✅ Home Page Main -->
   <main>
-    <div id="reelContainer" class="scroll-container">
-      <div class="loading">⏳ Loading reels...</div>
+    <!-- Top Ad under header -->
+    <div class="ad-slot-home">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '109022c5c6ccc85d8723a2df0ec792f2',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/109022c5c6ccc85d8723a2df0ec792f2/invoke.js"></script>
     </div>
-  </main>
 
-  <!-- Mid / Social Banner -->
-  <div class="ad-slot" id="midAd"></div>
+    <!-- 🔹 10 Posts -->
+    <section class="home-posts">
+
+      <!-- Example Post 1 -->
+      <article class="post">
+        <h2>🔥 Hot Desi Reels Collection</h2>
+        <p>Watch trending Indian MMS, Tamil reels & village girl videos in HD.</p>
+        <img src="assets/img/sample1.jpg" alt="Post Image" />
+        <div class="btn-group">
+          <a href="https://www.revenuecpmgate.com/zz3jtcc4au?key=4fb9b760cea37e4e47e91b1c0257b566" class="btn">Click Here</a>
+          <a href="/reels" class="btn">Watch Reels</a>
+        </div>
+      </article>
+
+      <!-- Example Post 2 -->
+      <article class="post">
+        <h2>💃 Latest Tamil MMS</h2>
+        <p>Fresh Tamil MMS & desi romantic clips trending now.</p>
+        <img src="assets/img/sample2.jpg" alt="Post Image" />
+        <div class="btn-group">
+          <a href="https://www.revenuecpmgate.com/zz3jtcc4au?key=4fb9b760cea37e4e47e91b1c0257b566" class="btn">Click Here</a>
+          <a href="/reels" class="btn">Watch Reels</a>
+        </div>
+      </article>
+
+      <!-- 👉 इसी तरह आप 8 और article duplicate करके डाल दो -->
+      
+    </section>
+  </main>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <button><img src="assets/icons/home.png" alt="Home"><span>Home</span></button>
+    <button onclick="window.location.href='/'"><img src="assets/icons/home.png" alt="Home"><span>Home</span></button>
     <button><img src="assets/icons/search.png" alt="Search"><span>Search</span></button>
     <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
     <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
+    <button onclick="window.location.href='/reels'"><img src="assets/icons/video.png" alt="Reels"><span>Reels</span></button>
   </nav>
-
-  <!-- Bottom / Native Banner -->
-  <div class="ad-slot" id="bottomAd"></div>
-
-  <!-- Main JS -->
-  <script src="assets/js/app.js"></script>
-
-  <!-- ✅ Safe DOM-ready Ads Loader -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Top Ad
-      const topAdDiv = document.getElementById("topAd");
-      const topScript = document.createElement("script");
-      topScript.type = "text/javascript";
-      topScript.src = "//pl27684651.revenuecpmgate.com/02/19/e9/0219e928d54280f0beaff20bcddff472.js";
-      topAdDiv.appendChild(topScript);
-
-      // Mid / Social Banner
-      const midAdDiv = document.getElementById("midAd");
-      const midScript = document.createElement("script");
-      midScript.async = true;
-      midScript.setAttribute("data-cfasync", "false");
-      midScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
-      midAdDiv.appendChild(midScript);
-      const midContainer = document.createElement("div");
-      midContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac";
-      midAdDiv.appendChild(midContainer);
-
-      // Bottom / Native Banner
-      const bottomAdDiv = document.getElementById("bottomAd");
-      const bottomScript = document.createElement("script");
-      bottomScript.async = true;
-      bottomScript.setAttribute("data-cfasync", "false");
-      bottomScript.src = "//pl27684641.revenuecpmgate.com/555e447ee3bcb7553f2d7ad6696e6aac/invoke.js";
-      bottomAdDiv.appendChild(bottomScript);
-      const bottomContainer = document.createElement("div");
-      bottomContainer.id = "container-555e447ee3bcb7553f2d7ad6696e6aac-footer";
-      bottomAdDiv.appendChild(bottomContainer);
-    });
-  </script>
 
 </body>
 </html>
