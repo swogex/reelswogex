@@ -1,7 +1,15 @@
+// ==================== Global Variables ====================
 window.WORKER_BASE = "https://swogexworker.ustrafficorganic.workers.dev"; // बिना स्लैश
 let reelCount = 0;
 let currentPlaying = null; // currently visible video
+let deferredPrompt; // for PWA install prompt
 
+// ==================== Side Menu Toggle ====================
+function toggleMenu() {
+  document.getElementById('sideMenu').classList.toggle('active');
+}
+
+// ==================== Load Reels ====================
 async function loadVideos() {
   const container = document.getElementById("reelContainer");
   container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
@@ -16,7 +24,6 @@ async function loadVideos() {
       return;
     }
 
-    // loop through videos without injecting any inline ads
     data.videos.forEach((video) => {
       reelCount++;
       const reel = document.createElement("div");
@@ -43,12 +50,10 @@ async function loadVideos() {
 
       // Autoplay ensure
       vidEl.addEventListener("canplay", () => {
-        if (vidEl.paused) {
-          vidEl.play().catch(() => {});
-        }
+        if (vidEl.paused) vidEl.play().catch(() => {});
       });
 
-      // Play / Pause
+      // Play / Pause toggle
       const toggleVideo = () => {
         if (vidEl.paused) {
           vidEl.play().catch(() => {});
@@ -75,13 +80,10 @@ async function loadVideos() {
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
 
-      // Append the reel
       container.appendChild(reel);
     });
 
-    // -----------------------------
     // Scroll / Auto-Pause Handler
-    // -----------------------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
@@ -119,15 +121,17 @@ async function loadVideos() {
     window.addEventListener("scroll", handleScrollPause, { passive: true });
     setInterval(handleScrollPause, 800);
     handleScrollPause();
+
   } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
   }
 }
 
-// Bottom nav actions
+// ==================== Bottom nav actions ====================
 document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
+
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length === 4) {
     btns[0].onclick = () => (window.location.href = "/");
@@ -137,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//app install
-let deferredPrompt;
+// ==================== PWA Install Prompt ====================
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
@@ -166,11 +169,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
     popup.remove();
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choice) => {
-      if (choice.outcome === "accepted") {
-        console.log("✅ User installed swogex App");
-      } else {
-        console.log("❌ User dismissed install");
-      }
       deferredPrompt = null;
     });
   });
@@ -180,7 +178,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
   });
 });
 
-// service worker
+// ==================== Service Worker ====================
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js")
     .then(() => console.log("✅ Service Worker registered"))
