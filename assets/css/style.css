@@ -7,7 +7,7 @@
   --side-width: 260px;
 }
 
-/* ========== Global Reset ========== */
+/* ========== GLOBAL RESET ========== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 body {
@@ -20,7 +20,7 @@ body {
   padding-bottom: var(--bottom-nav-height);
 }
 
-/* ========== Header ========== */
+/* ========== GLOBAL HEADER ========== */
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -54,7 +54,7 @@ header .logo {
   border-radius: 2px;
 }
 
-/* ========== Side Menu ========== */
+/* ========== GLOBAL SIDE MENU ========== */
 .side-menu {
   position: fixed;
   top: 0;
@@ -64,7 +64,7 @@ header .logo {
   background: #111;
   color: #fff;
   transition: right 0.3s ease;
-  z-index: 999;
+  z-index: 1500;
   padding: calc(var(--header-height) + 20px) 20px;
   display: flex;
   flex-direction: column;
@@ -79,10 +79,9 @@ header .logo {
   font-size: 16px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-
 .side-menu a:hover { color: var(--accent); }
 
-/* ========== Bottom Navigation ========== */
+/* ========== GLOBAL BOTTOM NAV ========== */
 .bottom-nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -109,7 +108,7 @@ header .logo {
 }
 .bottom-nav button img { width: 24px; height: 24px; }
 
-/* ========== Home Page ========== */
+/* ========== HOME PAGE ONLY ========== */
 .home-page .home-posts {
   display: grid;
   gap: 20px;
@@ -142,7 +141,7 @@ header .logo {
 }
 .home-page .btn:hover { background: #e02244; }
 
-/* ========== Reels Page ========== */
+/* ========== REELS PAGE ONLY ========== */
 .reels-page {
   position: relative;
   background: #000;
@@ -221,14 +220,8 @@ header .logo {
   color: #fff;
   transition: transform 0.2s ease;
 }
-.reels-page .icon-btn img {
-  width: 36px;
-  height: 36px;
-}
-.reels-page .icon-btn span {
-  font-size: 12px;
-  margin-top: 4px;
-}
+.reels-page .icon-btn img { width: 36px; height: 36px; }
+.reels-page .icon-btn span { font-size: 12px; margin-top: 4px; }
 .reels-page .icon-btn:hover { transform: scale(1.1); }
 
 .reels-page .audio-btn {
@@ -242,12 +235,9 @@ header .logo {
   justify-content: center;
   cursor: pointer;
 }
-.reels-page .audio-btn img {
-  width: 28px;
-  height: 28px;
-}
+.reels-page .audio-btn img { width: 28px; height: 28px; }
 
-/* ========== Responsive ========== */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 600px) {
   .home-page .home-posts { gap: 16px; }
 }
