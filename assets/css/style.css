@@ -1,21 +1,11 @@
+<style>
 :root {
   --bg: transparent;
   --text: #fff;
   --accent: #ff2d55;
 }
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body, main {
-  height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-}
+/* ...rest of CSS... */
+</style>
 
 /* ================= Header ================= */
 header {
