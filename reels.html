@@ -12,12 +12,11 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
 
+<body class="reels-page">
   <!-- Header -->
   <header>
     <img src="assets/img/logo.png" class="logo" alt="Swogex Logo">
-    <img src="assets/icons/animated-icon.png" class="live-icon" alt="Live">
   </header>
 
   <!-- Reels Section -->
@@ -25,17 +24,29 @@
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
     </div>
-    <body class="reels-page">
-
   </main>
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <button onclick="window.location.href='/'"><img src="assets/icons/home.png" alt="Home"><span>Home</span></button>
-    <button><img src="assets/icons/search.png" alt="Search"><span>Search</span></button>
-    <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
-    <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
-    <button onclick="window.location.href='/reels'"><img src="assets/icons/video.png" alt="Reels"><span>Reels</span></button>
+    <button onclick="window.location.href='/'">
+      <img src="assets/icons/home.png" alt="Home"><span>Home</span>
+    </button>
+
+    <button>
+      <img src="assets/icons/search.png" alt="Search"><span>Search</span>
+    </button>
+
+    <button>
+      <img src="assets/icons/saved.png" alt="Saved"><span>Saved</span>
+    </button>
+
+    <button>
+      <img src="assets/icons/login.png" alt="Login"><span>Login</span>
+    </button>
+
+    <button onclick="window.location.href='/reels'">
+      <img src="assets/icons/video.png" alt="Reels"><span>Reels</span>
+    </button>
   </nav>
 
   <!-- Main JS (Reels logic) -->
