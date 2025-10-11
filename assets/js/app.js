@@ -4,12 +4,30 @@ let reelCount = 0;
 let currentPlaying = null;
 let deferredPrompt;
 
-// ==================== Side Menu Toggle ====================
-function toggleMenu() {
-  document.getElementById('sideMenu').classList.toggle('active');
-}
+// ==================== DOMContentLoaded ====================
+document.addEventListener("DOMContentLoaded", () => {
 
-// ==================== Load Reels ====================
+  // ---------------- Side Menu Toggle ----------------
+  const menuIcon = document.querySelector(".menu-icon");
+  menuIcon.addEventListener("click", () => {
+    document.getElementById("sideMenu").classList.toggle("active");
+  });
+
+  // ---------------- Load Reels ----------------
+  loadVideos();
+
+  // ---------------- Bottom Nav ----------------
+  const btns = document.querySelectorAll(".bottom-nav button");
+  if (btns.length >= 5) {
+    btns[0].onclick = () => (window.location.href = "/");
+    btns[1].onclick = () => alert("Search feature coming soon.");
+    btns[2].onclick = () => alert("Bookmark feature coming soon.");
+    btns[3].onclick = () => alert("Login feature coming soon.");
+    btns[4].onclick = () => (window.location.href = "/reels");
+  }
+});
+
+// ==================== Load Reels Function ====================
 async function loadVideos() {
   const container = document.getElementById("reelContainer");
   container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
@@ -48,25 +66,23 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Autoplay ensure
-      vidEl.addEventListener("canplay", () => { if (vidEl.paused) vidEl.play().catch(() => {}); });
-
-      // Play/Pause toggle
+      // ---------------- Video Play/Pause ----------------
       const toggleVideo = () => {
         if (vidEl.paused) { vidEl.play().catch(() => {}); playBtn.textContent = "⏸"; }
         else { vidEl.pause(); playBtn.textContent = "▶"; }
       };
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
+      vidEl.addEventListener("canplay", () => { if (vidEl.paused) vidEl.play().catch(() => {}); });
 
-      // Audio toggle
+      // ---------------- Audio Toggle ----------------
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
         vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
         audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
-      // Like/Comment/Share demo
+      // ---------------- Like / Comment / Share ----------------
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
@@ -74,7 +90,7 @@ async function loadVideos() {
       container.appendChild(reel);
     });
 
-    // Scroll/Auto-Pause
+    // ---------------- Scroll / Auto-Pause ----------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
@@ -116,19 +132,6 @@ async function loadVideos() {
   }
 }
 
-// ==================== Bottom Nav ====================
-document.addEventListener("DOMContentLoaded", () => {
-  loadVideos();
-  const btns = document.querySelectorAll(".bottom-nav button");
-  if (btns.length >= 5) {
-    btns[0].onclick = () => (window.location.href = "/");
-    btns[1].onclick = () => alert("Search feature coming soon.");
-    btns[2].onclick = () => alert("Bookmark feature coming soon.");
-    btns[3].onclick = () => alert("Login feature coming soon.");
-    btns[4].onclick = () => (window.location.href = "/reels");
-  }
-});
-
 // ==================== PWA Install Prompt ====================
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -158,7 +161,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
   });
-
   document.getElementById("closeBtn").addEventListener("click", () => popup.remove());
 });
 
