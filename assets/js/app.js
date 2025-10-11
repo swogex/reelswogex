@@ -1,8 +1,8 @@
 // ==================== Global Variables ====================
-window.WORKER_BASE = "https://swogexworker.ustrafficorganic.workers.dev"; // बिना स्लैश
+window.WORKER_BASE = "https://swogexworker.ustrafficorganic.workers.dev";
 let reelCount = 0;
-let currentPlaying = null; // currently visible video
-let deferredPrompt; // for PWA install prompt
+let currentPlaying = null;
+let deferredPrompt;
 
 // ==================== Side Menu Toggle ====================
 function toggleMenu() {
@@ -24,7 +24,7 @@ async function loadVideos() {
       return;
     }
 
-    data.videos.forEach((video) => {
+    data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
       reel.className = "reel";
@@ -49,19 +49,12 @@ async function loadVideos() {
       const audioImg = audioBtn.querySelector("img");
 
       // Autoplay ensure
-      vidEl.addEventListener("canplay", () => {
-        if (vidEl.paused) vidEl.play().catch(() => {});
-      });
+      vidEl.addEventListener("canplay", () => { if (vidEl.paused) vidEl.play().catch(() => {}); });
 
-      // Play / Pause toggle
+      // Play/Pause toggle
       const toggleVideo = () => {
-        if (vidEl.paused) {
-          vidEl.play().catch(() => {});
-          playBtn.textContent = "⏸";
-        } else {
-          vidEl.pause();
-          playBtn.textContent = "▶";
-        }
+        if (vidEl.paused) { vidEl.play().catch(() => {}); playBtn.textContent = "⏸"; }
+        else { vidEl.pause(); playBtn.textContent = "▶"; }
       };
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
@@ -70,12 +63,10 @@ async function loadVideos() {
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
         vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
-        audioImg.src = vidEl.muted
-          ? "assets/icons/speaker-off.png"
-          : "assets/icons/speaker-on.png";
+        audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
-      // Like / Comment / Share (demo only)
+      // Like/Comment/Share demo
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
       reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
@@ -83,15 +74,14 @@ async function loadVideos() {
       container.appendChild(reel);
     });
 
-    // Scroll / Auto-Pause Handler
+    // Scroll/Auto-Pause
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
     }
 
     function handleScrollPause() {
-      const reels = document.querySelectorAll(".reel");
-      reels.forEach(reel => {
+      document.querySelectorAll(".reel").forEach(reel => {
         const video = reel.querySelector(".reel-video");
         const playBtn = reel.querySelector(".play-pause-btn");
         const audioBtnImg = reel.querySelector(".audio-btn img");
@@ -99,11 +89,9 @@ async function loadVideos() {
         if (isInViewport(video)) {
           if (currentPlaying && currentPlaying !== video) {
             currentPlaying.pause();
-            const prevPlayBtn = currentPlaying.closest(".reel").querySelector(".play-pause-btn");
-            prevPlayBtn.textContent = "▶";
+            currentPlaying.closest(".reel").querySelector(".play-pause-btn").textContent = "▶";
             currentPlaying.muted = true;
-            currentPlaying.closest(".reel").querySelector(".audio-btn img").src =
-              "assets/icons/speaker-off.png";
+            currentPlaying.closest(".reel").querySelector(".audio-btn img").src = "assets/icons/speaker-off.png";
           }
           video.play().catch(() => {});
           if (!video.dataset.userUnmuted) video.muted = true;
@@ -122,22 +110,22 @@ async function loadVideos() {
     setInterval(handleScrollPause, 800);
     handleScrollPause();
 
-  } catch (err) {
+  } catch(err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
   }
 }
 
-// ==================== Bottom nav actions ====================
+// ==================== Bottom Nav ====================
 document.addEventListener("DOMContentLoaded", () => {
   loadVideos();
-
   const btns = document.querySelectorAll(".bottom-nav button");
-  if (btns.length === 4) {
+  if (btns.length >= 5) {
     btns[0].onclick = () => (window.location.href = "/");
     btns[1].onclick = () => alert("Search feature coming soon.");
     btns[2].onclick = () => alert("Bookmark feature coming soon.");
     btns[3].onclick = () => alert("Login feature coming soon.");
+    btns[4].onclick = () => (window.location.href = "/reels");
   }
 });
 
@@ -168,14 +156,10 @@ window.addEventListener("beforeinstallprompt", (e) => {
   document.getElementById("installBtn").addEventListener("click", () => {
     popup.remove();
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choice) => {
-      deferredPrompt = null;
-    });
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
   });
 
-  document.getElementById("closeBtn").addEventListener("click", () => {
-    popup.remove();
-  });
+  document.getElementById("closeBtn").addEventListener("click", () => popup.remove());
 });
 
 // ==================== Service Worker ====================
