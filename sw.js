@@ -8,6 +8,7 @@ const ASSETS_TO_CACHE = [
   "assets/css/header.css",
   "assets/css/footer.css",
   "assets/css/home.css",
+  "assets/css/reels.css",
   "/assets/js/app.js",
   "/assets/images/logo.png",
 ];
