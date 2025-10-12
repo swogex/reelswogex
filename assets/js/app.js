@@ -7,12 +7,6 @@ let deferredPrompt;
 // ==================== DOMContentLoaded ====================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ---------------- Side Menu Toggle ----------------
-  const menuIcon = document.querySelector(".menu-icon");
-  menuIcon.addEventListener("click", () => {
-    document.getElementById("sideMenu").classList.toggle("active");
-  });
-
   // ---------------- Load Reels ----------------
   loadVideos();
 

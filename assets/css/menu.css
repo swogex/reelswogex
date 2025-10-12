@@ -1,15 +1,15 @@
-/* ========== SIDE MENU ========== */
+/* Side Menu */
 .side-menu {
   position: fixed;
   top: 0;
-  right: -260px; /* initially hidden */
+  right: -260px; 
   width: 260px;
   height: 100vh;
   background: #111;
   color: #fff;
   transition: right 0.3s ease;
   z-index: 1500;
-  padding: 56px 20px 20px 20px; /* header height 56px */
+  padding: 56px 20px 20px 20px;
   display: flex;
   flex-direction: column;
 }
@@ -22,12 +22,11 @@
   padding: 12px 0;
   font-size: 16px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: color 0.2s;
 }
 
 .side-menu a:hover { color: #ff2d55; }
 
-/* overlay behind menu */
+/* Overlay */
 .menu-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -36,3 +35,19 @@
   display: none;
 }
 .menu-overlay.active { display: block; }
+
+/* Hamburger icon */
+.menu-icon {
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.menu-icon span {
+  display: block;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+}
