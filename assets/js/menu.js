@@ -1,32 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const menuIcon = document.querySelector(".menu-icon");
-  const sideMenu = document.getElementById("sideMenu");
+function toggleMenu() {
+  const sideMenu = document.getElementById('sideMenu');
+  sideMenu.classList.toggle('active');
+}
 
-  if (!menuIcon || !sideMenu) return; // safety check
-
-  // create overlay dynamically
-  let overlay = document.createElement("div");
-  overlay.className = "menu-overlay";
-  document.body.appendChild(overlay);
-
-  // open menu
-  const openMenu = () => {
-    sideMenu.classList.add("active");
-    overlay.classList.add("active");
-  };
-
-  // close menu
-  const closeMenu = () => {
-    sideMenu.classList.remove("active");
-    overlay.classList.remove("active");
-  };
-
-  // toggle menu on hamburger click
-  menuIcon.addEventListener("click", () => {
-    if (sideMenu.classList.contains("active")) closeMenu();
-    else openMenu();
-  });
-
-  // close menu on overlay click
-  overlay.addEventListener("click", closeMenu);
+// Optional: Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  const sideMenu = document.getElementById('sideMenu');
+  const menuIcon = document.querySelector('.menu-icon');
+  if (!sideMenu.contains(e.target) && !menuIcon.contains(e.target)) {
+    sideMenu.classList.remove('active');
+  }
 });

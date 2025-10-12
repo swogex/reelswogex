@@ -2,52 +2,58 @@
 .side-menu {
   position: fixed;
   top: 0;
-  right: -260px; 
-  width: 260px;
-  height: 100vh;
+  left: -250px;
+  width: 250px;
+  height: 100%;
   background: #111;
-  color: #fff;
-  transition: right 0.3s ease;
-  z-index: 1500;
-  padding: 56px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 9999;
 }
 
-.side-menu.active { right: 0; }
+.side-menu.active {
+  left: 0;
+}
 
 .side-menu a {
+  display: block;
   color: #fff;
+  padding: 15px 20px;
   text-decoration: none;
-  padding: 12px 0;
   font-size: 16px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.side-menu a:hover { color: #ff2d55; }
-
-/* Overlay */
-.menu-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1400;
-  display: none;
+.side-menu a:hover {
+  background: rgba(255,255,255,0.1);
 }
-.menu-overlay.active { display: block; }
 
-/* Hamburger icon */
+/* Hamburger Icon */
 .menu-icon {
-  width: 30px;
-  height: 24px;
+  width: 35px;
+  height: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  z-index: 10000;
 }
+
 .menu-icon span {
   display: block;
-  height: 3px;
+  height: 4px;
   background: #fff;
   border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Optional: Animate Hamburger into X when menu active */
+.side-menu.active ~ header .menu-icon span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.side-menu.active ~ header .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+.side-menu.active ~ header .menu-icon span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
