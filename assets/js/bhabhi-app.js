@@ -55,7 +55,6 @@ async function loadBhabhiVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Play/Pause
       const toggleVideo = () => {
         if (vidEl.paused) { vidEl.play().catch(() => {}); playBtn.textContent = "⏸"; }
         else { vidEl.pause(); playBtn.textContent = "▶"; }
@@ -63,7 +62,6 @@ async function loadBhabhiVideos() {
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
 
-      // Audio toggle
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
         audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
@@ -72,7 +70,6 @@ async function loadBhabhiVideos() {
       container.appendChild(reel);
     });
 
-    // Scroll / Auto-Pause
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;

@@ -56,5 +56,12 @@
 
   <!-- JS -->
   <script src="assets/js/bhabhi-app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/assets/js/bhabhi-sw.js", { scope: "/bhabhi.html" })
+        .then(() => console.log("✅ Bhabhi SW registered"))
+        .catch(err => console.error("❌ Bhabhi SW failed:", err));
+    }
+  </script>
 </body>
 </html>
