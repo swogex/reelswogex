@@ -1,5 +1,5 @@
 // ==================== Global Variables ====================
-window.BH_WORKER_BASE = "https://your-new-bhabhi-worker-url.workers.dev";
+window.BH_WORKER_BASE = "https://bhabhireel.ustrafficorganic.workers.dev";
 let bhReelCount = 0;
 let bhCurrentPlaying = null;
 
