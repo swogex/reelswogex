@@ -7,23 +7,20 @@
   <meta name="description" content="Watch nonstop hot Indian Bhabhi reels, Tamil MMS & village Bhabhi videos with autoplay reels." />
   <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/footer.css">
-  <link rel="stylesheet" href="assets/css/home.css">
-  <link rel="stylesheet" href="assets/css/reels.css">
-  <link rel="stylesheet" href="assets/css/menu.css">
 
-  <!-- JS Menu -->
-  <script src="assets/js/menu.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/css/header.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/home.css">
+  <link rel="stylesheet" href="/assets/css/reels.css">
+  <link rel="stylesheet" href="/assets/css/menu.css">
 </head>
 
 <body class="reels-page">
+  <!-- Header -->
   <header>
-    <img src="assets/img/logo.png" class="logo" alt="Swogex Logo">
+    <img src="/assets/img/logo.png" class="logo" alt="Swogex Logo">
     <div class="menu-icon" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
@@ -38,7 +35,7 @@
     <a href="/reels">▶ Watch Reels</a>
   </div>
 
-  <!-- Bhabhi Reels Section -->
+  <!-- Reels Section -->
   <main>
     <div id="bhabhiReelContainer" class="scroll-container">
       <div class="loading">⏳ Loading Bhabhi reels...</div>
@@ -47,21 +44,24 @@
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <button><img src="assets/icons/home.png" alt="Home"><span>Home</span></button>
-    <button><img src="assets/icons/search.png" alt="Search"><span>Search</span></button>
-    <button><img src="assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
-    <button><img src="assets/icons/login.png" alt="Login"><span>Login</span></button>
-    <button><img src="assets/icons/video.png" alt="Reels"><span>Reels</span></button>
+    <button onclick="window.location.href='/'"><img src="/assets/icons/home.png" alt="Home"><span>Home</span></button>
+    <button><img src="/assets/icons/search.png" alt="Search"><span>Search</span></button>
+    <button><img src="/assets/icons/saved.png" alt="Saved"><span>Saved</span></button>
+    <button><img src="/assets/icons/login.png" alt="Login"><span>Login</span></button>
+    <button><img src="/assets/icons/video.png" alt="Reels"><span>Reels</span></button>
   </nav>
 
   <!-- JS -->
-  <script src="assets/js/bhabhi-app.js"></script>
+  <script src="/assets/js/menu.js"></script>
+  <script src="/assets/js/bhabhi-app.js"></script>
+
+  <!-- Service Worker Register -->
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/assets/js/bhabhi-sw.js", { scope: "/bhabhi.html" })
-        .then(() => console.log("✅ Bhabhi SW registered"))
-        .catch(err => console.error("❌ Bhabhi SW failed:", err));
-    }
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/bhabhi-sw.js", { scope: "/" })
+      .then(() => console.log("✅ Bhabhi SW registered"))
+      .catch(err => console.error("❌ Bhabhi SW failed:", err));
+  }
   </script>
 </body>
 </html>
