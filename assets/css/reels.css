@@ -1,104 +1,141 @@
-/* ========== REELS PAGE ONLY ========== */
-.reels-page {
-  position: relative;
-  background: #000;
-  height: 100vh;
-  overflow: hidden;
+/* ========== ROOT VARIABLES ========== */
+:root {
+  --bg: #000;
+  --text: #fff;
+  --accent: #ff2d55;
+  --header-height: 56px;
+  --bottom-nav-height: 56px;
+  --side-width: 260px;
 }
 
-.reels-page .scroll-container {
-  position: relative;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  height: 100%;
+/* ========== GLOBAL RESET ========== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
   padding-top: var(--header-height);
   padding-bottom: var(--bottom-nav-height);
 }
 
-.reels-page .reel {
-  scroll-snap-align: start;
-  height: 100vh;
-  width: 100%;
+/* ========== HEADER ========== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-height);
+  background: #000;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+header .logo { height: 36px; object-fit: contain; }
+.menu-icon {
+  width: 30px; height: 24px;
+  cursor: pointer; display: flex;
+  flex-direction: column; justify-content: space-between;
+}
+.menu-icon span { background: #fff; height: 3px; border-radius: 2px; }
+
+/* ========== SIDE MENU ========== */
+.side-menu {
+  position: fixed;
+  top: 0; right: -260px;
+  width: var(--side-width); height: 100vh;
+  background: #111; color: #fff;
+  transition: right 0.3s ease; z-index: 1500;
+  padding: calc(var(--header-height) + 20px) 20px;
+  display: flex; flex-direction: column;
+}
+.side-menu.active { right: 0; }
+.side-menu a {
+  color: #fff; text-decoration: none; padding: 12px 0; font-size: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.side-menu a:hover { color: var(--accent); }
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--bottom-nav-height);
+  background: #000; display: flex;
+  justify-content: space-around; align-items: center;
+  z-index: 1000; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.bottom-nav button {
+  background: transparent; border: none; color: #fff;
+  font-size: 10px; cursor: pointer; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px;
+}
+.bottom-nav button img { width: 24px; height: 24px; }
+
+/* ========== REELS PAGE ONLY ========== */
+.reels-page {
+  position: relative; background: #000; height: 100vh; overflow: hidden;
+}
+
+.reels-page .scroll-container {
+  position: relative; overflow-y: scroll;
+  scroll-snap-type: y mandatory; height: 100%;
+}
+
+.reels-page .reel {
+  scroll-snap-align: start;
+  height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+  width: 100%; display: flex;
+  align-items: center; justify-content: center;
   position: relative;
 }
 
 .reels-page .reel-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100%; height: 100%; object-fit: cover;
   background: #000;
 }
 
 .reels-page .play-pause-btn {
-  position: absolute;
-  top: 50%; left: 50%;
+  position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;
-  width: 70px; height: 70px;
-  color: #fff;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
+  background: rgba(0,0,0,0.5); border-radius: 50%;
+  width: 70px; height: 70px; color: #fff; font-size: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10;
 }
 
 .reels-page .footer-tags {
-  position: absolute;
-  bottom: 80px;
-  left: 12px;
-  font-size: 14px;
-  background: rgba(0,0,0,0.4);
-  padding: 5px 10px;
-  border-radius: 6px;
-  max-width: 80%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  position: absolute; bottom: 80px; left: 12px;
+  font-size: 14px; background: rgba(0,0,0,0.4);
+  padding: 5px 10px; border-radius: 6px;
+  max-width: 80%; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
 }
 
 .reels-page .right-icons {
-  position: absolute;
-  right: 12px;
-  top: 50%;
+  position: absolute; right: 12px; top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  z-index: 15;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 20px; z-index: 15;
 }
 
 .reels-page .icon-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  color: #fff;
-  transition: transform 0.2s ease;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; color: #fff; transition: transform 0.2s ease;
 }
-
 .reels-page .icon-btn img { width: 36px; height: 36px; }
 .reels-page .icon-btn span { font-size: 12px; margin-top: 4px; }
 .reels-page .icon-btn:hover { transform: scale(1.1); }
 
 .reels-page .audio-btn {
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
+  width: 50px; height: 50px; border: none; border-radius: 50%;
   background: rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
-
 .reels-page .audio-btn img { width: 28px; height: 28px; }
 
 /* ====== RESPONSIVE ====== */
