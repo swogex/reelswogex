@@ -1,0 +1,25 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--bottom-nav-height);
+  background: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.bottom-nav button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.bottom-nav button img { width: 24px; height: 24px; }
