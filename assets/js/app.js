@@ -7,6 +7,9 @@ let deferredPrompt;
 // ==================== DOMContentLoaded ====================
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ✅ Allow body to scroll
+  document.body.style.overflowY = "auto";
+
   // ---------------- Load Reels ----------------
   loadVideos();
 
@@ -36,6 +39,7 @@ async function loadVideos() {
       return;
     }
 
+    // ---------------- Create Reels ----------------
     data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
@@ -43,7 +47,7 @@ async function loadVideos() {
 
       reel.innerHTML = `
         <video class="reel-video" src="${video.url}" autoplay loop muted playsinline preload="auto"></video>
-        <div class="footer-tags">#xxx #desi #sex #bhabhi #village girl #mms</div>
+        <div class="footer-tags">#desi #bhabhi #mms #village #tiktok</div>
         <div class="play-pause-btn">⏸</div>
         <div class="right-icons">
           <div class="icon-btn like-btn"><img src="assets/icons/like.png"><span>120</span></div>
@@ -62,12 +66,19 @@ async function loadVideos() {
 
       // ---------------- Video Play/Pause ----------------
       const toggleVideo = () => {
-        if (vidEl.paused) { vidEl.play().catch(() => {}); playBtn.textContent = "⏸"; }
-        else { vidEl.pause(); playBtn.textContent = "▶"; }
+        if (vidEl.paused) { 
+          vidEl.play().catch(() => {}); 
+          playBtn.textContent = "⏸"; 
+        } else { 
+          vidEl.pause(); 
+          playBtn.textContent = "▶"; 
+        }
       };
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
-      vidEl.addEventListener("canplay", () => { if (vidEl.paused) vidEl.play().catch(() => {}); });
+      vidEl.addEventListener("canplay", () => { 
+        if (vidEl.paused) vidEl.play().catch(() => {}); 
+      });
 
       // ---------------- Audio Toggle ----------------
       audioBtn.addEventListener("click", () => {
@@ -77,9 +88,12 @@ async function loadVideos() {
       });
 
       // ---------------- Like / Comment / Share ----------------
-      reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked!"));
-      reel.querySelector(".comment-btn").addEventListener("click", () => alert("Open comments!"));
-      reel.querySelector(".share-btn").addEventListener("click", () => alert("Share link copied!"));
+      reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked! ❤️"));
+      reel.querySelector(".comment-btn").addEventListener("click", () => alert("Comments opening soon! 💬"));
+      reel.querySelector(".share-btn").addEventListener("click", () => {
+        navigator.clipboard.writeText(video.url);
+        alert("Share link copied! 🔗");
+      });
 
       container.appendChild(reel);
     });
@@ -116,11 +130,12 @@ async function loadVideos() {
       });
     }
 
+    // Scroll + interval check
     window.addEventListener("scroll", handleScrollPause, { passive: true });
     setInterval(handleScrollPause, 800);
     handleScrollPause();
 
-  } catch(err) {
+  } catch (err) {
     console.error("Error loading videos:", err);
     container.innerHTML = "<p>⚠️ Error loading videos.</p>";
   }
@@ -137,7 +152,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
     <div style="position:fixed; bottom:65px; left:0; right:0; background:#000; color:#fff;
                 padding:12px; text-align:center; font-family:Arial, sans-serif; font-size:14px;
                 z-index:9999; box-shadow:0 -2px 8px rgba(0,0,0,0.4);">
-      Install swogex App?
+      Install Swogex App?
       <button id="installBtn" style="margin-left:10px; padding:6px 12px; background:#ff2d55;
                                      color:#fff; border:none; border-radius:4px; cursor:pointer;">
         Install
