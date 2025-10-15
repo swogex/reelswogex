@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==================== Load Reels Function ====================
 async function loadVideos() {
   const container = document.getElementById("reelContainer");
+
+  if (!container) {
+    console.error("❌ No element with id 'reelContainer' found in the DOM!");
+    return;
+  }
+
   container.innerHTML = "<div class='loading'>⏳ Loading reels...</div>";
 
   try {
@@ -110,6 +116,8 @@ async function loadVideos() {
         const playBtn = reel.querySelector(".play-pause-btn");
         const audioBtnImg = reel.querySelector(".audio-btn img");
 
+        if (!video) return;
+
         if (isInViewport(video)) {
           if (currentPlaying && currentPlaying !== video) {
             currentPlaying.pause();
@@ -175,7 +183,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 // ==================== Service Worker ====================
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js")
-    .then(() => console.log("✅ Service Worker registered"))
-    .catch(err => console.error("❌ SW registration failed:", err));
+  navigator.serviceWorker.register("/bhabhi-sw.js")
+    .then(() => console.log("✅ Bhabhi SW registered"))
+    .catch(err => console.error("❌ Bhabhi SW registration failed:", err));
 }
