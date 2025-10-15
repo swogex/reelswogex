@@ -1,77 +1,33 @@
-// ==================== Service Worker ====================
-const CACHE_NAME = "swogex-cache-v1";
-const URLS_TO_CACHE = [
-  "/",
-  "/assets/css/global.css",
-  "/assets/css/header.css",
-  "/assets/css/footer.css",
-  "/assets/css/home.css",
-  "/assets/css/reels.css",
-  "/assets/css/menu.css",
-  "/assets/js/app.js",
-  "/assets/js/menu.js",
-  "/assets/img/logo.png",
-  "/assets/icons/home.png",
-  "/assets/icons/search.png",
-  "/assets/icons/saved.png",
-  "/assets/icons/login.png",
-  "/assets/icons/video.png"
-];
+// ==================== Simple Service Worker ====================
 
 // ==================== Install ====================
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(URLS_TO_CACHE))
-      .then(() => self.skipWaiting())
-  );
+  console.log("✅ Service Worker installed");
+  self.skipWaiting(); // Activate immediately
 });
 
 // ==================== Activate ====================
 self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(names => {
-      return Promise.all(
-        names.map(name => {
-          if (name !== CACHE_NAME) return caches.delete(name);
-        })
-      );
-    })
-  );
-  self.clients.claim();
+  console.log("✅ Service Worker activated");
+  self.clients.claim(); // Take control of pages immediately
 });
 
 // ==================== Fetch ====================
 self.addEventListener("fetch", event => {
-  // Only handle GET requests
+  // Only handle GET requests to the same origin
   if (event.request.method !== "GET") return;
+  if (!event.request.url.startsWith(self.location.origin)) return;
 
+  // Try network, fallback to offline page (optional)
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      // Always try network first
-      return fetch(event.request)
-        .then(response => {
-          // If invalid or opaque response, return directly (don’t cache)
-          if (!response || response.status !== 200 || response.type === "opaque") {
-            return cached || response;
-          }
-
-          // Clone once for caching
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
-          });
-
-          return response;
-        })
-        .catch(() => {
-          // If offline and cached available → serve it
-          if (cached) return cached;
-          // Optional fallback page
-          if (event.request.destination === "document") {
-            return caches.match("/");
-          }
-        });
+    fetch(event.request).catch(() => {
+      // Optional: return offline page if request is navigation
+      if (event.request.mode === "navigate") {
+        return new Response(
+          "<h1>Offline</h1><p>Check your internet connection.</p>",
+          { headers: { "Content-Type": "text/html" } }
+        );
+      }
     })
   );
 });
