@@ -1,5 +1,5 @@
 // ==================== Global Variables ====================
-window.WORKER_BASE = "https://swogexworker.ustrafficorganic.workers.dev";
+window.WORKER_BASE = "https://schoolgirl.ustrafficorganic.workers.dev";
 let reelCount = 0;
 let currentPlaying = null;
 let deferredPrompt;
@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     btns[1].onclick = () => alert("Search feature coming soon.");
     btns[2].onclick = () => alert("Bookmark feature coming soon.");
     btns[3].onclick = () => alert("Login feature coming soon.");
-    btns[4].onclick = () => (window.location.href = "/indian-video.html");
+    btns[4].onclick = () => (window.location.href = "/schoolgirl-video.html");
   }
 });
 
 // ==================== Load Videos ====================
 async function loadVideos() {
   const container = document.getElementById("reelContainer");
-  container.innerHTML = "<div class='loading'>⏳ Loading Indian videos...</div>";
+  container.innerHTML = "<div class='loading'>⏳ Loading schoolgirl videos...</div>";
 
   try {
     const res = await fetch(window.WORKER_BASE + "/videos");
@@ -31,7 +31,7 @@ async function loadVideos() {
     container.innerHTML = "";
 
     if (!data.videos || data.videos.length === 0) {
-      container.innerHTML = "<p>No Indian videos found.</p>";
+      container.innerHTML = "<p>No schoolgirl videos found.</p>";
       return;
     }
 
@@ -126,8 +126,8 @@ async function loadVideos() {
     handleScrollPause();
 
   } catch (err) {
-    console.error("Error loading Indian videos:", err);
-    container.innerHTML = "<p>⚠️ Error loading Indian videos.</p>";
+    console.error("Error loading schoolgirl videos:", err);
+    container.innerHTML = "<p>⚠️ Error loading schoolgirl videos.</p>";
   }
 }
 
@@ -165,7 +165,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 // ==================== Service Worker ====================
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/indian-video-sw.js")
-    .then(() => console.log("✅ Indian Video SW registered"))
+  navigator.serviceWorker.register("/schoolgirl-video-sw.js")
+    .then(() => console.log("✅ schoolgirl Video SW registered"))
     .catch(err => console.error("❌ SW registration failed:", err));
 }
