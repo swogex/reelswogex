@@ -1,4 +1,4 @@
-// ==================== Simple Service Worker (Indian Video) ====================
+// ==================== Simple Service Worker (schoolgirl Video) ====================
 
 // ==================== Install ====================
 self.addEventListener("install", event => {
@@ -8,7 +8,7 @@ self.addEventListener("install", event => {
 
 // ==================== Activate ====================
 self.addEventListener("activate", event => {
-  console.log("✅ Indian Video Service Worker activated");
+  console.log("✅ schoolgirl Video Service Worker activated");
   self.clients.claim();
 });
 
