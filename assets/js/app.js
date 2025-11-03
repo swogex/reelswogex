@@ -6,13 +6,13 @@ let currentPlaying = null;
 // ==================== DOMContentLoaded ====================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Allow body to scroll
+  // ✅ Allow body to scroll
   document.body.style.overflowY = "auto";
 
-  // Load Reels
+  // ---------------- Load Reels ----------------
   loadVideos();
 
-  // Bottom Nav Buttons
+  // ---------------- Bottom Nav ----------------
   const btns = document.querySelectorAll(".bottom-nav button");
   if (btns.length >= 5) {
     btns[0].onclick = () => (window.location.href = "/");
@@ -38,7 +38,6 @@ async function loadVideos() {
       return;
     }
 
-    // Create Reels
     data.videos.forEach(video => {
       reelCount++;
       const reel = document.createElement("div");
@@ -63,7 +62,7 @@ async function loadVideos() {
       const audioBtn = reel.querySelector(".audio-btn");
       const audioImg = audioBtn.querySelector("img");
 
-      // Video Play/Pause
+      // ---------------- Video Play/Pause ----------------
       const toggleVideo = () => {
         if (vidEl.paused) { 
           vidEl.play().catch(() => {}); 
@@ -79,14 +78,14 @@ async function loadVideos() {
         if (vidEl.paused) vidEl.play().catch(() => {}); 
       });
 
-      // Audio Toggle
+      // ---------------- Audio Toggle ----------------
       audioBtn.addEventListener("click", () => {
         vidEl.muted = !vidEl.muted;
         vidEl.dataset.userUnmuted = !vidEl.muted ? "true" : "false";
         audioImg.src = vidEl.muted ? "assets/icons/speaker-off.png" : "assets/icons/speaker-on.png";
       });
 
-      // Like / Comment / Share
+      // ---------------- Like / Comment / Share ----------------
       reel.querySelector(".like-btn").addEventListener("click", () => alert("Liked! ❤️"));
       reel.querySelector(".comment-btn").addEventListener("click", () => alert("Comments opening soon! 💬"));
       reel.querySelector(".share-btn").addEventListener("click", () => {
@@ -97,7 +96,7 @@ async function loadVideos() {
       container.appendChild(reel);
     });
 
-    // Scroll / Auto-Pause
+    // ---------------- Scroll / Auto-Pause ----------------
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
@@ -107,7 +106,7 @@ async function loadVideos() {
       document.querySelectorAll(".reel").forEach(reel => {
         const video = reel.querySelector(".reel-video");
         const playBtn = reel.querySelector(".play-pause-btn");
-        const audioImg = reel.querySelector(".audio-btn img");
+        const audioBtnImg = reel.querySelector(".audio-btn img");
 
         if (isInViewport(video)) {
           if (currentPlaying && currentPlaying !== video) {
@@ -124,7 +123,7 @@ async function loadVideos() {
           video.pause();
           video.muted = true;
           playBtn.textContent = "▶";
-          audioImg.src = "assets/icons/speaker-off.png";
+          audioBtnImg.src = "assets/icons/speaker-off.png";
         }
       });
     }
@@ -142,9 +141,7 @@ async function loadVideos() {
 // ==================== PWA Install Prompt ====================
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
-  // Assign to menu.js's deferredPrompt variable
-  if (window.deferredPrompt === undefined) window.deferredPrompt = e;
-  else window.deferredPrompt = e;
+  window.deferredPrompt = e;
 
   const popup = document.createElement("div");
   popup.id = "installPopup";
@@ -170,15 +167,13 @@ window.addEventListener("beforeinstallprompt", (e) => {
     window.deferredPrompt.prompt();
     window.deferredPrompt.userChoice.then(() => { window.deferredPrompt = null; });
   });
+
   document.getElementById("closeBtn").addEventListener("click", () => popup.remove());
 });
 
 // ==================== Service Worker ====================
-// Only register if not already registered
 if ("serviceWorker" in navigator) {
-  if (!navigator.serviceWorker.controller) {
-    navigator.serviceWorker.register("/sw.js")
-      .then(() => console.log("✅ Service Worker registered"))
-      .catch(err => console.error("❌ SW registration failed:", err));
-  }
+  navigator.serviceWorker.register("/sw.js")
+    .then(() => console.log("✅ Service Worker registered"))
+    .catch(err => console.error("❌ SW registration failed:", err));
 }
