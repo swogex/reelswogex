@@ -2,6 +2,7 @@
 window.WORKER_BASE = "https://swogexworker.ustrafficorganic.workers.dev";
 let reelCount = 0;
 let currentPlaying = null;
+let deferredPrompt;
 
 // ==================== DOMContentLoaded ====================
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btns[3].onclick = () => alert("Login feature coming soon.");
     btns[4].onclick = () => (window.location.href = "/reels");
   }
+
 });
 
 // ==================== Load Reels Function ====================
@@ -141,7 +143,7 @@ async function loadVideos() {
 // ==================== PWA Install Prompt ====================
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
-  window.deferredPrompt = e;
+  deferredPrompt = e;
 
   const popup = document.createElement("div");
   popup.id = "installPopup";
@@ -164,10 +166,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
   document.getElementById("installBtn").addEventListener("click", () => {
     popup.remove();
-    window.deferredPrompt.prompt();
-    window.deferredPrompt.userChoice.then(() => { window.deferredPrompt = null; });
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
   });
-
   document.getElementById("closeBtn").addEventListener("click", () => popup.remove());
 });
 
@@ -177,3 +178,18 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("✅ Service Worker registered"))
     .catch(err => console.error("❌ SW registration failed:", err));
 }
+
+// ==================== Menu Toggle ====================
+function toggleMenu() { 
+  const sideMenu = document.getElementById('sideMenu'); 
+  sideMenu.classList.toggle('active'); 
+}
+
+// Optional: Close menu when clicking outside
+document.addEventListener('click', (e) => { 
+  const sideMenu = document.getElementById('sideMenu'); 
+  const menuIcon = document.querySelector('.menu-icon'); 
+  if (!sideMenu.contains(e.target) && !menuIcon.contains(e.target)) { 
+    sideMenu.classList.remove('active'); 
+  } 
+});
