@@ -76,9 +76,6 @@ async function loadVideos() {
       };
       vidEl.addEventListener("click", toggleVideo);
       playBtn.addEventListener("click", toggleVideo);
-      vidEl.addEventListener("canplay", () => { 
-        if (vidEl.paused) vidEl.play().catch(() => {}); 
-      });
 
       // ---------------- Audio Toggle ----------------
       audioBtn.addEventListener("click", () => {
@@ -98,29 +95,27 @@ async function loadVideos() {
       container.appendChild(reel);
     });
 
-    // ---------------- Scroll / Auto-Pause ----------------
-    function isInViewport(el) {
-      const rect = el.getBoundingClientRect();
-      return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
-    }
+    // ================= IntersectionObserver for Scroll Play/Pause =================
+    const options = { root: null, rootMargin: '0px', threshold: 0.6 };
+    const reelsVideos = document.querySelectorAll('.reel-video');
 
-    function handleScrollPause() {
-      document.querySelectorAll(".reel").forEach(reel => {
-        const video = reel.querySelector(".reel-video");
-        const playBtn = reel.querySelector(".play-pause-btn");
-        const audioBtnImg = reel.querySelector(".audio-btn img");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        const playBtn = video.closest('.reel').querySelector('.play-pause-btn');
+        const audioBtnImg = video.closest('.reel').querySelector('.audio-btn img');
 
-        if (isInViewport(video)) {
+        if (entry.isIntersecting) {
           if (currentPlaying && currentPlaying !== video) {
             currentPlaying.pause();
-            currentPlaying.closest(".reel").querySelector(".play-pause-btn").textContent = "▶";
+            currentPlaying.closest('.reel').querySelector('.play-pause-btn').textContent = "▶";
             currentPlaying.muted = true;
             currentPlaying.closest(".reel").querySelector(".audio-btn img").src = "assets/icons/speaker-off.png";
           }
           video.play().catch(() => {});
           if (!video.dataset.userUnmuted) video.muted = true;
           currentPlaying = video;
-          playBtn.textContent = video.paused ? "▶" : "⏸";
+          playBtn.textContent = "⏸";
         } else {
           video.pause();
           video.muted = true;
@@ -128,11 +123,9 @@ async function loadVideos() {
           audioBtnImg.src = "assets/icons/speaker-off.png";
         }
       });
-    }
+    }, options);
 
-    window.addEventListener("scroll", handleScrollPause, { passive: true });
-    setInterval(handleScrollPause, 800);
-    handleScrollPause();
+    reelsVideos.forEach(video => observer.observe(video));
 
   } catch (err) {
     console.error("Error loading videos:", err);
