@@ -8,14 +8,12 @@
   <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/global.css">
-<link rel="stylesheet" href="assets/css/header.css">
-<link rel="stylesheet" href="assets/css/footer.css">
-<link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/reels.css">
-<link rel="stylesheet" href="assets/css/menu.css">
-<script src="assets/js/menu.js"></script>
-
-
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/reels.css">
+  <link rel="stylesheet" href="assets/css/menu.css">
+  <script src="assets/js/menu.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta name="eroads_" content="e3635b540d1edbcbe9f0f5f74dbe4fc2" />
   <script type='text/javascript' src='//pl27740622.revenuecpmgate.com/ed/14/6a/ed146afa412c67c24de6f56bec71ddca.js'></script>
@@ -25,7 +23,7 @@
   <header>
     <img src="assets/img/logo.png" class="logo" alt="Swogex Logo">
     <div class="menu-icon" onclick="toggleMenu()">
-  <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
     </div>
   </header>
 
@@ -40,6 +38,34 @@
 
   <!-- Reels Section -->
   <main>
+    <!-- In-page video ad -->
+    <div id="sp_8191613_node" style="max-width:426px;max-height:240px;display:none">&nbsp;</div>
+    <script charset="utf-8">
+    if (typeof eaCtrl =="undefined"){ 
+      var eaCtrlRecs=[];
+      var eaCtrl = {add:function(ag){eaCtrlRecs.push(ag)}};
+      var js = document.createElement('script');
+      js.setAttribute("src","//go.easrv.cl/loadeactrl.go?pid=154091&spaceid=8191613&ctrlid=799356");
+      document.head.appendChild(js);
+    }
+
+    eaCtrl.add({
+      "plugin":"inpage_video",
+      "sid":8191613,
+      "display":"sp_8191613_node",
+      "skip_btn":true,
+      "skip_after_sec":5,
+      "show_countdown":true,
+      "skip_position":"top_right",
+      "auto_hide":true,
+      "controls":false,
+      "muted":true,
+      "autoplay":true,
+      "loop":true,
+      "advertise":"Advertisement"
+    });
+    </script>
+
     <div id="reelContainer" class="scroll-container">
       <div class="loading">⏳ Loading reels...</div>
     </div>
