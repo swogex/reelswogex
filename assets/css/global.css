@@ -19,3 +19,31 @@ body {
   padding-top: var(--header-height);
   padding-bottom: var(--bottom-nav-height);
 }
+
+#topTimer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  z-index: 9999;
+  display: none;
+}
+
+#middleTimerBox {
+  margin: 40px 0;
+  padding: 20px;
+  text-align: center;
+  background: #f5f5f5;
+  font-size: 20px;
+  display: none;
+}
+
+#hiddenLink {
+  display: none;
+  margin-top: 10px;
+}
