@@ -23,7 +23,7 @@ document.addEventListener("click", (e) => {
 // ================= REFERRAL TIMER LOGIC =================
 
 // 👉 Yaha apni referral site daalo
-const allowedReferrer = "yoursite2.com";
+const allowedReferrer = "https://wpcall.dirtypush.com/";
 
 if (document.referrer.includes(allowedReferrer)) {
 
