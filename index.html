@@ -33,6 +33,39 @@
   </script>
 </head>
 
+<div id="main-timer" style="display:none; font-size:20px; font-weight:bold; text-align:center; margin-top:20px;"></div>
+
+<script>
+const TIMER_SECONDS = 20;
+const REDIRECT_LINK = "https://wpcall.dirtypush.com/";
+
+function startTimer() {
+    let time = TIMER_SECONDS;
+    const el = document.getElementById("main-timer");
+
+    if (!el) return;
+
+    el.style.display = "block";
+
+    const interval = setInterval(() => {
+        el.innerHTML = `Free credit ke liye wait karen (${time})`;
+        time--;
+
+        if (time < 0) {
+            clearInterval(interval);
+            window.location.href = REDIRECT_LINK;
+        }
+    }, 1000);
+}
+
+// URL Parameter Detection (Fail-proof)
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("from") === "wpcall") {
+    startTimer();
+}
+</script>
+
 <body class="home-page">
 
   <!-- Header -->
@@ -359,39 +392,5 @@
       document.getElementById('sideMenu').classList.toggle('active');
     }
   </script>
-
-<div id="main-timer" style="display:none; font-size:20px; font-weight:bold; text-align:center; margin-top:20px;"></div>
-
-<script>
-const TIMER_SECONDS = 20;
-const REDIRECT_LINK = "https://wpcall.dirtypush.com/";
-
-function startTimer() {
-    let time = TIMER_SECONDS;
-    const el = document.getElementById("main-timer");
-
-    if (!el) return;
-
-    el.style.display = "block";
-
-    const interval = setInterval(() => {
-        el.innerHTML = `Free credit ke liye wait karen (${time})`;
-        time--;
-
-        if (time < 0) {
-            clearInterval(interval);
-            window.location.href = REDIRECT_LINK;
-        }
-    }, 1000);
-}
-
-// URL Parameter Detection (Fail-proof)
-const params = new URLSearchParams(window.location.search);
-
-if (params.get("from") === "wpcall") {
-    startTimer();
-}
-</script>
-
 </body>
 </html>
