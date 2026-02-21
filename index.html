@@ -43,10 +43,6 @@
     </div>
   </header>
 
-  <div id="topTimer">
-  Please wait <span id="topCount">10</span> seconds...
-</div>
-
   <!-- In-page video ad -->
   <div id="sp_8191613_node" style="max-width:426px;max-height:240px;display:none">&nbsp;</div>
   <script charset="utf-8">
@@ -363,6 +359,39 @@
       document.getElementById('sideMenu').classList.toggle('active');
     }
   </script>
+
+<div id="main-timer" style="display:none; font-size:20px; font-weight:bold; text-align:center; margin-top:20px;"></div>
+
+<script>
+const TIMER_SECONDS = 20;
+const REDIRECT_LINK = "https://wpcall.dirtypush.com/";
+
+function startTimer() {
+    let time = TIMER_SECONDS;
+    const el = document.getElementById("main-timer");
+
+    if (!el) return;
+
+    el.style.display = "block";
+
+    const interval = setInterval(() => {
+        el.innerHTML = `Free credit ke liye wait karen (${time})`;
+        time--;
+
+        if (time < 0) {
+            clearInterval(interval);
+            window.location.href = REDIRECT_LINK;
+        }
+    }, 1000);
+}
+
+// URL Parameter Detection (Fail-proof)
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("from") === "wpcall") {
+    startTimer();
+}
+</script>
 
 </body>
 </html>
